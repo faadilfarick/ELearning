@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using System.Configuration;
 using ELearning.DAL;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace ELearning.Models
 {
@@ -61,18 +62,27 @@ namespace ELearning.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Videos videos)//[Bind(Include = "ID,Name,Discription,Course.ID")]
+        public ActionResult Create(Videos videos, HttpPostedFileBase upload)//[Bind(Include = "ID,Name,Discription,Course.ID")]
         {
             if (!ModelState.IsValid)
             {
-                //db.Configuration.
-                ////db.Videos.Add(videos);
-                ////db.SaveChanges();
-                //Videos vid = new Videos() { Name = videos.Name, Discription = videos.Discription };
-                //Course cou = db.Courses.FirstOrDefault(s => s.ID == videos.Course.ID);
 
-                //vid
-                string query = "AddVideos '" + videos.Name + "','" + videos.Discription + "','" + videos.Course.ID + "'";
+                var path = "";
+                if (upload == null)
+                {
+                    ViewBag.CourseInfo = new SelectList(db.Courses.Where(c => c.ApplicationUser.Id == userID).ToList(), "ID", "Name");
+                    ViewBag.vidError = "Video Requrired...";
+                    return View(videos);
+                }
+                else if (upload.ContentLength > 0)
+                {
+                    var fileName = videos.Course.ID + " " + videos.Name; 
+                    path = Path.Combine(Server.MapPath("~/Content/Videos"));
+                    upload.SaveAs(path+"\\"+fileName);
+                }
+                
+                
+                string query = "AddVideos '" + videos.Name + "','" + videos.Discription + "','" + videos.Course.ID + "','"+path+"'";
                 bool res = new SystemDAL().executeNonQuerys(query);
                 return RedirectToAction("Index");
             }

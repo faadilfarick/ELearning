@@ -14,6 +14,12 @@ namespace ELearning.Models
         [Required]
         public string Discription { get; set; }
 
+        [Display(Name ="File Path")]
+        public string  FilePath { get; set; }
+
+        //public IEnumerable<HttpPostedFileBase> file { get; set; }
+
+        //public IEnumerable<HttpPostedFileBase> file { get; set; }
         public virtual Course Course { get; set; }
     }
 }

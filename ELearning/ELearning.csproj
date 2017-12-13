@@ -223,6 +223,22 @@
     <Compile Include="Migrations\201712120123025_CourseAndVidesReqaddition.Designer.cs">
       <DependentUpon>201712120123025_CourseAndVidesReqaddition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712130124243_video_File.cs" />
+    <Compile Include="Migrations\201712130124243_video_File.Designer.cs">
+      <DependentUpon>201712130124243_video_File.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712130127438_video_File1.cs" />
+    <Compile Include="Migrations\201712130127438_video_File1.Designer.cs">
+      <DependentUpon>201712130127438_video_File1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712130144134_video_File2.cs" />
+    <Compile Include="Migrations\201712130144134_video_File2.Designer.cs">
+      <DependentUpon>201712130144134_video_File2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712130247207_video_Files.cs" />
+    <Compile Include="Migrations\201712130247207_video_Files.Designer.cs">
+      <DependentUpon>201712130247207_video_Files.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -325,6 +341,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Videos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -346,6 +363,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712120123025_CourseAndVidesReqaddition.resx">
       <DependentUpon>201712120123025_CourseAndVidesReqaddition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712130124243_video_File.resx">
+      <DependentUpon>201712130124243_video_File.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712130127438_video_File1.resx">
+      <DependentUpon>201712130127438_video_File1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712130144134_video_File2.resx">
+      <DependentUpon>201712130144134_video_File2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712130247207_video_Files.resx">
+      <DependentUpon>201712130247207_video_Files.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
