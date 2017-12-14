@@ -11,7 +11,7 @@ Note do not change spellings
 
 step 4 - in sql server run this Queries 
 
--- quires---
+
 create proc AddVideos
 (
 @name nvarchar(max),
