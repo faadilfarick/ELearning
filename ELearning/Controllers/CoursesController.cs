@@ -98,7 +98,7 @@ namespace ELearning.Controllers
             var owner = c.ApplicationUser.Id;
             if (ModelState.IsValid)
             {
-                if (CurrentLoggedUser == c.ApplicationUser.Id)
+                if (CurrentLoggedUser == owner)
                 {
                     //detach this entity from the DbSet
                     db.Entry(c).State = EntityState.Detached;

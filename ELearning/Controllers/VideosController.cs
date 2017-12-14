@@ -14,6 +14,7 @@ using System.IO;
 
 namespace ELearning.Models
 {
+    [Authorize]
     public class VideosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -66,7 +67,7 @@ namespace ELearning.Models
         {
             if (!ModelState.IsValid)
             {
-
+                var fileName = "";
                 var path = "";
                 if (upload == null)
                 {
@@ -76,13 +77,14 @@ namespace ELearning.Models
                 }
                 else if (upload.ContentLength > 0)
                 {
-                    var fileName = videos.Course.ID + " " + videos.Name; 
+                    string extension = Path.GetExtension(upload.FileName);
+                    fileName = videos.Course.ID + videos.Name+ extension;
                     path = Path.Combine(Server.MapPath("~/Content/Videos"));
-                    upload.SaveAs(path+"\\"+fileName);
+                    upload.SaveAs(path + "\\" + fileName);
                 }
-                
-                
-                string query = "AddVideos '" + videos.Name + "','" + videos.Discription + "','" + videos.Course.ID + "','"+path+"'";
+
+               // var videoPath = path + "\\" + fileName;
+                string query = "AddVideos '" + videos.Name + "','" + videos.Discription + "','" + videos.Course.ID + "','" + fileName + "'";
                 bool res = new SystemDAL().executeNonQuerys(query);
                 return RedirectToAction("Index");
             }
@@ -113,15 +115,62 @@ namespace ELearning.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Videos videos)
+        public ActionResult Edit(Videos videos, HttpPostedFileBase upload)
         {
             if (!ModelState.IsValid)
             {
-                //UpdateVideos
-                string query = "UpdateVideos '" + videos.ID + "','" + videos.Name + "'," +
-                    "'" + videos.Discription + "','" + videos.Course.ID + "'";
-                bool res = new SystemDAL().executeNonQuerys(query);
+                var CurrentLoggedUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                //Course c = db.Courses.Find(videos.Course.ID);
+                var owner = " ";
+                string querys = "SELECT  Videos.*, Courses.ApplicationUser_Id FROM Courses INNER JOIN Videos ON Courses.ID = Videos.Course_ID  where Videos.ID = '" + videos.ID + "'";
+                SqlDataReader reader = new SystemDAL().executeQuerys(querys);
+                if (reader.Read())
+                {
+                     owner = reader[5].ToString();
+                }
+                    
+                
+                if (CurrentLoggedUser == owner)
+                {
+                    var fileName = "";
+                    var path = "";
+                    if (upload == null)
+                    {
+                        // upload without video change
+                        string query = "UpdateVideos '" + videos.ID + "','" + videos.Name + "'," +
+                         "'" + videos.Discription + "','" + videos.Course.ID + "'";
+                        bool res = new SystemDAL().executeNonQuerys(query);
+                        return RedirectToAction("Index");
+                    }
+                    else if (upload.ContentLength > 0)
+                    {
+                        //upload with file change 
+                        string extension = Path.GetExtension(upload.FileName);
+                        fileName = videos.Course.ID + videos.Name  + extension;
+                        path = Path.Combine(Server.MapPath("~/Content/Videos"));
+                        upload.SaveAs(path + "\\" + fileName);
+                        //deleteing the old file
+                        Videos vid = db.Videos.Find(videos.ID);
+                        string fullPath = "~/Images/Cakes/" + vid.FilePath;
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                        }
+                        //saving the data
+                        string query = "UpdateVideosWithFile '" + videos.ID + "','" + videos.Name + "'," +
+                         "'" + videos.Discription + "','" + videos.Course.ID + "','" + fileName + "'";
+                        bool res = new SystemDAL().executeNonQuerys(query);
+                        return RedirectToAction("Index");
+                    }
 
+
+                    
+                }
+                else
+                {
+                    ViewBag.info = "You are Not Authorized to do changes to this content";
+                    return View("~/Views/Shared/NotAuthorized.cshtml");
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.CourseInfo = new SelectList(db.Courses.Where(c => c.ApplicationUser.Id == userID).ToList(), "ID", "Name");

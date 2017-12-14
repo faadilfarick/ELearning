@@ -9,7 +9,19 @@
 <div>
     <h4>Videos</h4>
     <hr />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <video class="img-thumbnail img-responsive" controls>
+                    <source src="~/Content/Videos/@Model.FilePath" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+    </div>
+
     <dl class="dl-horizontal">
+
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>

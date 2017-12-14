@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Videos", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -45,6 +45,32 @@
                 @Html.ValidationMessageFor(model => model.Course.ID, "", new { @class = "text-danger" })
             </div>
         </div>*@
+        <div class="form-group">
+
+            @*@Html.TextBoxFor(m => m.file, new { type = "file" ,htmlAttributes = new { @class = "form-control" } })*@
+
+
+            @Html.Label("Video", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="video" name="upload" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])" accept="video/*" />
+
+            </div>
+            @*<div class="col-md-6">
+                <video id="preview" class="img-thumbnail img-responsive" src="" controls></video>
+            </div>
+            <span style="color:red">@ViewBag.vidError</span>*@
+
+            <br />
+            @* @Html.ValidationMessageFor(m => m.file, "", new { @class = "text-danger" })*@
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <video id="preview"   class="img-thumbnail img-responsive" controls>
+                    <source src="~/Content/Videos/@Model.FilePath" type="video/mp4" />
+                </video>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
