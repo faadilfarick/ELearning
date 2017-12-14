@@ -23,8 +23,22 @@ begin
 update [dbo].[Videos] set [Name]=@name,[Discription]=@dis,[Course_ID]=@cID where [ID]=@id
 end
 
-SELECT * FROM [dbo].[Videos]
- SELECT * FROM [dbo].[Courses]
+
+create proc UpdateVideosWithFile
+(
+@id int,
+@name nvarchar(max),
+@dis nvarchar(max),
+@cID int,
+@path nvarchar(max)
+)
+as
+begin
+update [dbo].[Videos] set [Name]=@name,[Discription]=@dis,[Course_ID]=@cID,[FilePath]=@path  where [ID]=@id
+end
+
+SELECT * FROM [dbo].[Videos] 
+ SELECT * FROM [dbo].[Courses] where Courses.ID=1
  select* from [dbo].[AspNetUsers]
 
 
@@ -41,3 +55,15 @@ SELECT * FROM [dbo].[Videos]
 
 
 
+SELECT        Videos.*, Courses.ApplicationUser_Id
+FROM            Courses INNER JOIN
+                         Videos ON Courses.ID = Videos.Course_ID  where Videos.ID=10
+
+
+
+SELECT  Videos.*, Courses.ApplicationUser_Id FROM Courses INNER JOIN Videos ON Courses.ID = Videos.Course_ID  where Videos.ID = '6'
+
+
+
+
+select * from Videos where [Course_ID]=4
