@@ -1,8 +1,22 @@
+# Elearning
+step 1 - edit web.config file connection strings 
+
+Step 2 - Run the system once and create a user 
+
+step 3 - add roles
+1. ADMIN
+2. STUDENT
+3. INSTRUCTOR
+Note do not change spellings
+
+step 4 - in sql server run this Queries 
+
+
 create proc AddVideos
 (
 @name nvarchar(max),
 @dis nvarchar(max),
-@cID int,
+@cID int
 @path nvarchar(max)
 )
 as
@@ -38,8 +52,6 @@ update [dbo].[Videos] set [Name]=@name,[Discription]=@dis,[Course_ID]=@cID,[File
 end
 
 
-
-
  create proc AddCourse
  (
  @name nvarchar(max),
@@ -50,4 +62,6 @@ end
  begin
  insert into [dbo].[Courses]([Name],[Discription],[ApplicationUser_Id]) values (@name,@discription,@uID)
  end
+
+
 
