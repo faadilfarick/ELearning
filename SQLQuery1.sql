@@ -2,7 +2,7 @@ create proc AddVideos
 (
 @name nvarchar(max),
 @dis nvarchar(max),
-@cID int
+@cID int,
 @path nvarchar(max)
 )
 as
