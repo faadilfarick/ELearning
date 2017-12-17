@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<ELearning.Models.Course>
+@using PagedList.Mvc;
+@using PagedList;
 
 @{
     ViewBag.Title = "Courses";
@@ -76,18 +78,22 @@
 
 <div class="container">
     <div class="row">
-        @foreach (var item in Model)
-        {            
+        @foreach(var item in ViewBag.OnePageOfProducts)
+        {
             <div class="col-md-4">
-                <div class="jumbotron"  style="">
+                <div class="jumbotron"  style="height:50ch">
                     <h3 >
                         
-                        @Html.ActionLink(item.Name, "Details", new { id = item.ID })
+                        @Html.ActionLink((string)item.Name, "Details", new { id = item.ID })
                         
                     </h3>
+                    <p style="text-align:left ; font-size:smaller; color:gray">
+                        <b>By : </b>
+                        @item.ApplicationUser.FullName
+                    </p>
                     <hr />
                     <p style="overflow:hidden;height:5ch; max-height:5ch; font-size:18px;">
-                        @Html.DisplayFor(modelItem => item.Discription)
+                         @item.Discription
                     </p>
 
                     @{
@@ -107,10 +113,8 @@
 
                         }
                     }
-                    <p style="text-align:right ; font-size:smaller">
-                        <b>Created by: </b>
-                        @Html.DisplayFor(modelItem => item.ApplicationUser.FullName)
-                    </p>
+                    
+                    
 
                 </div>
 
@@ -119,3 +123,16 @@
         
     </div>
 </div>
+@*<h2>List of Products</h2>
+    <ul>
+        @foreach (var product in ViewBag.OnePageOfProducts)
+        {
+            <li>@product.Name</li>
+            
+        }
+    </ul>*@
+<center>
+    
+
+    @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", new { page }))
+</center>

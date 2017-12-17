@@ -31,7 +31,7 @@ namespace ELearning.Controllers
             return role;
         }
         // GET: Courses
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
             string role = getRoleForUserID(userID);
@@ -40,12 +40,24 @@ namespace ELearning.Controllers
             if (role == "STUDENT" || role == "")//if role=student or not logged in all cources are visible
             {
                 List<Course> cou = db.Courses.ToList();
-                return View(cou);
+                var products = cou.OrderBy(v => v.ID); //returns IQueryable<Product> representing an unknown number of products. a thousand maybe?
+
+                var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+                var onePageOfProducts = products.ToPagedList(pageNumber, 6); // will only contain 25 products max because of the pageSize
+
+                ViewBag.OnePageOfProducts = onePageOfProducts;
+                return View();
             }
             else//displaying cources based on owner for edit purposes
             {
                 List<Course> co = db.Courses.Where(c => c.ApplicationUser.Id == userID).ToList();
-                return View(co);
+                var products = co.OrderBy(v => v.ID); //returns IQueryable<Product> representing an unknown number of products. a thousand maybe?
+
+                var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+                var onePageOfProducts = products.ToPagedList(pageNumber, 6); // will only contain 25 products max because of the pageSize
+
+                ViewBag.OnePageOfProducts = onePageOfProducts;
+                return View();
             }
 
         }
