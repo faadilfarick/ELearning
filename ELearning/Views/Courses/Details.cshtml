@@ -1,5 +1,6 @@
 ﻿@model ELearning.Models.Course
-
+@using PagedList.Mvc; 
+@using PagedList;
 @{
     ViewBag.Title = "Details";
 }
@@ -138,7 +139,7 @@
     </div>*@
 <div class="container">
     <div class="row  ">
-        @foreach (var videos in ViewBag.videosList)
+        @foreach (var videos in ViewBag.OnePageOfProducts)
         {
 
             <div class="col-md-3 voffset2">
@@ -169,5 +170,16 @@
     }
 
 }
+
+@*<h2>List of Products</h2>
+<ul>
+    @foreach (var product in ViewBag.OnePageOfProducts)
+    {
+        <li>@product.Name</li>
+    }
+</ul>*@
+
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Details", new { page }))
 
 

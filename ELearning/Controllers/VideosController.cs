@@ -21,6 +21,7 @@ namespace ELearning.Models
         string userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
         // GET: Videos
+        [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Index()
         {
             var data = db.Videos.Where(v => v.Course.ApplicationUser.Id == userID).ToList();

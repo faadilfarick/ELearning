@@ -10,10 +10,12 @@ using ELearning.Models;
 using Microsoft.AspNet.Identity;
 using ELearning.DAL;
 using System.Data.SqlClient;
+using PagedList;
+
 
 namespace ELearning.Controllers
 {
-  
+
 
     public class CoursesController : Controller
     {
@@ -31,11 +33,11 @@ namespace ELearning.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();           
-            string role= getRoleForUserID(userID);
+            var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            string role = getRoleForUserID(userID);
             ViewBag.role = role;
             //diplaying cources according to the users 
-            if(role== "STUDENT"||role=="")//if role=student or not logged in all cources are visible
+            if (role == "STUDENT" || role == "")//if role=student or not logged in all cources are visible
             {
                 List<Course> cou = db.Courses.ToList();
                 return View(cou);
@@ -45,12 +47,13 @@ namespace ELearning.Controllers
                 List<Course> co = db.Courses.Where(c => c.ApplicationUser.Id == userID).ToList();
                 return View(co);
             }
-           
+
         }
 
         // GET: Courses/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -59,6 +62,7 @@ namespace ELearning.Controllers
             string query = "select * from Videos where [Course_ID]='" + id + "'";
             SqlDataReader reader = new SystemDAL().executeQuerys(query);
             List<Videos> videoListForCourse = new List<Videos>();
+            
             Videos vid = null;
             while (reader.Read())
             {
@@ -66,9 +70,10 @@ namespace ELearning.Controllers
                 vid.ID = Convert.ToInt32(reader[0]);
                 vid.Name = reader[1].ToString();
                 vid.Discription = reader[2].ToString();
-            //    vid.Course.ID = Convert.ToInt32(reader[3]);
+                //    vid.Course.ID = Convert.ToInt32(reader[3]);
                 vid.FilePath = reader[4].ToString();
                 videoListForCourse.Add(vid);
+                
             }
             ViewBag.videosList = videoListForCourse;
             var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -79,6 +84,15 @@ namespace ELearning.Controllers
             {
                 return HttpNotFound();
             }
+
+
+            var products = videoListForCourse.OrderBy(v=>v.Name); //returns IQueryable<Product> representing an unknown number of products. a thousand maybe?
+
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfProducts = products.ToPagedList(pageNumber, 8); // will only contain 25 products max because of the pageSize
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
+
             return View(course);
         }
 
