@@ -14,7 +14,7 @@ using System.IO;
 
 namespace ELearning.Models
 {
-    [Authorize]
+    [Authorize ]
     public class VideosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -44,7 +44,7 @@ namespace ELearning.Models
         }
 
         // GET: Videos/Create       
-
+        [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Create()
         {
             //List<SelectListItem> list = new List<SelectListItem>();
@@ -63,6 +63,7 @@ namespace ELearning.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Create(Videos videos, HttpPostedFileBase upload)//[Bind(Include = "ID,Name,Discription,Course.ID")]
         {
             if (!ModelState.IsValid)
@@ -93,6 +94,7 @@ namespace ELearning.Models
         }
 
         // GET: Videos/Edit/5
+        [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -115,6 +117,7 @@ namespace ELearning.Models
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Edit(Videos videos, HttpPostedFileBase upload)
         {
             if (!ModelState.IsValid)
@@ -179,6 +182,7 @@ namespace ELearning.Models
         }
 
         // GET: Videos/Delete/5
+        [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -196,6 +200,7 @@ namespace ELearning.Models
         // POST: Videos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult DeleteConfirmed(int id)
         {
             Videos videos = db.Videos.Find(id);

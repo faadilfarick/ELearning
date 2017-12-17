@@ -1,6 +1,103 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
+
+<style>
+    body {
+        background-color: #ccc;
+        width: 100%;
+        height: 100%;
+        padding: 50px;
+        /**/
+        /*font: normal normal 400 24px/1 "Lato", sans-serif;*/
+    }
+
+    *,
+    *::before,
+    *::after {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    /* --- */
+    .video-link {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: white;
+        background-color: #f03;
+        box-shadow: 0 5px 10px -3px rgba(0,0,0,.5);
+    }
+
+    /* --- */
+    .player {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,1);
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,.65) 0%, rgba(0,0,0,1) 100%);
+        background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,.65) 0%, rgba(0,0,0,1) 100%);
+        background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,.65) 0%, rgba(0,0,0,1) 100%);
+        background: radial-gradient(center, ellipse cover, rgba(0,0,0,.65) 0%,rgba(0,0,0,1) 100%);
+        opacity: 0;
+        -webkit-transition: opacity 0.3s ease-in-out;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .player__video {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        max-width: 75%;
+        background-color: #fff;
+        box-shadow: 0 0 50px rgba(0,0,0,.95);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+
+    .js--show-video {
+        opacity: 1;
+    }
+
+    .video-filler {
+        display: block;
+        width: 100%;
+    }
+
+    .video-close {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        right: -30px;
+        padding: 5px 10px;
+        border: none;
+        outline: none;
+        border-radius: 0 50% 50% 0;
+        cursor: pointer;
+        font-size: 24px;
+        color: #000;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba(0,0,0,.75);
+    }
+
+    .video-iframe {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 10px solid #fff;
+    }
+
+</style>
+
+
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
@@ -15,3 +112,12 @@
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+
+<p>  Click the button and then resize the window.</p>
+<a class="video-link" href="https://www.youtube.com/embed/ONaPq2L-MRg?html5=1" data-width="1920" data-height="1080">Open video</a>
+
+
+
+
+
