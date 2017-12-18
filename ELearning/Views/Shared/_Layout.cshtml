@@ -23,6 +23,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.Partial("_Categories")</li>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -30,6 +31,7 @@
                     <li>@Html.ActionLink("Add Role", "Index", "Role")</li>
                     <li>@Html.ActionLink("Course", "Index", "Courses")</li>
                     <li>@Html.ActionLink("Video", "Index", "Videos")</li>
+                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -53,19 +55,19 @@
 
 
         $videoLink.on('click', function (e) {
-            var localTemplate = '',
-                videoWidth = parseInt($(this).data('width')),
-                videoHeight = parseInt($(this).data('height')),
-                videoAspect = (videoHeight / videoWidth) * 100,
-                // elements
+                            var localTemplate = '',
+                                videoWidth = parseInt($(this).data('width')),
+                                videoHeight = parseInt($(this).data('height')),
+                                videoAspect = (videoHeight / videoWidth) * 100,
+                                // elements
                 $player = null,
                 $video = null,
                 $close = null,
                 $iframe = null;
 
-            e.preventDefault();
+                            e.preventDefault();
 
-            localTemplate = playerTemplate.replace('{{iframevideo}}', $(this).prop('href'));
+                            localTemplate = playerTemplate.replace('{{iframevideo}}', $(this).prop('href'));
 
             $player = $(localTemplate);
 
@@ -77,22 +79,30 @@
                 .find('.video-close')
                 .on('click', function () {
                     $(this).off().closest('.player').hide().remove();
-                });
+                            });
 
             $player.appendTo('body').addClass('js--show-video');
-        });
+                        });
     </script>
 
     @*<script type="text/javascript">
-        function myFunction() {
-            var $pop = Popcorn("#video-target"),
-                poster;
+        $(document).ready(function () {
+            $('.navbar a.dropdown-toggle').on('click', function (e) {
+                var $el = $(this);
+                var $parent = $(this).offsetParent(".dropdown-menu");
+                $(this).parent("li").toggleClass('open');
 
-            $pop.capture({
-                at: 10
+                if (!$parent.parent().hasClass('nav')) {
+                    $el.next().css({ "top": $el[0].offsetTop, "left": $parent.outerWidth() - 4 });
+                }
+
+                $('.nav li.open').not($(this).parents("li")).removeClass("open");
+
+                return false;
             });
-        }
+        });
 
     </script>*@
 </body>
 </html>
+

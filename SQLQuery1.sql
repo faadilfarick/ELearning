@@ -67,3 +67,27 @@ FROM            AspNetRoles INNER JOIN
 
  
  end
+
+ create proc addSubCategories
+ (
+ @Name nvarchar(max),
+ @Discription nvarchar(max),
+ @CategoriID int
+ )
+ as
+ begin
+ insert into [dbo].[SubCategories]([Name],[Discription],[Category_ID]) values(@Name,@Discription,@CategoriID)
+ end
+
+
+create proc UpdateSubCategories
+ (
+ @id int,
+ @Name nvarchar(max),
+ @Discription nvarchar(max),
+ @CategoriID int
+ )
+ as
+ begin
+ Update [dbo].[SubCategories] set[Name]= @Name,[Discription]=@Discription,[Category_ID]=@CategoriID where[ID]=@id
+ end

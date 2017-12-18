@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ELearning.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,8 @@ namespace ELearning.Controllers
 {
     public class HomeController : Controller
     {
-       // object id = Membership.GetUser().ProviderUserKey;
+        // object id = Membership.GetUser().ProviderUserKey;
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
@@ -30,5 +32,13 @@ namespace ELearning.Controllers
 
             return View();
         }
+
+        //[HttpGet]
+        //public ActionResult GetPageHeader()
+        //{
+        //    return PartialView(@"~/Views/Shared/_Categories.cshtml");
+        //}
+
+       
     }
 }

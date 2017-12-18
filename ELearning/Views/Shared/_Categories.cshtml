@@ -1,0 +1,30 @@
+﻿@*@model IEnumerable<ELearning.Models.SubCategory>*@
+
+
+@using ELearning.Controllers;
+
+
+<ul class="top-level-menu">
+
+    <li>
+        <a >Categories</a>@*---title----*@
+        <ul class="second-level-menu">
+
+            @foreach (var category in new SubCategoriesController().Passcategory())
+            {
+                <li>
+                    <a>@Html.ActionLink((string)category.Name, "Details", "Categories", new { id = category.ID }, null)</a>
+                    <ul class="third-level-menu">
+                        @foreach (var subcategory in new SubCategoriesController().PassSubCategory())
+                        {
+                            if (subcategory != null & subcategory.Category.ID == category.ID)
+                            {
+                                <li><a>  @Html.ActionLink((string)subcategory.Name, "Details", "SubCategories", new { id = subcategory.ID },null)</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </li>
+</ul>

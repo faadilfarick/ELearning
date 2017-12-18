@@ -17,7 +17,10 @@ namespace ELearning.Models
         public string Discription { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual Category MainCategory { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
 
         public virtual ICollection<Videos> Videos { get; set; }
+       // public virtual ICollection<Category> CategoryList { get; set; }
     }
 }

@@ -200,10 +200,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="DAL\DBEstablish.cs" />
     <Compile Include="DAL\SystemDAL.cs" />
     <Compile Include="Global.asax.cs">
@@ -245,12 +247,38 @@
     <Compile Include="Migrations\201712130247207_video_Files.Designer.cs">
       <DependentUpon>201712130247207_video_Files.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712171635116_categoryAdd.cs" />
+    <Compile Include="Migrations\201712171635116_categoryAdd.Designer.cs">
+      <DependentUpon>201712171635116_categoryAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712171715440_Subcategory.cs" />
+    <Compile Include="Migrations\201712171715440_Subcategory.Designer.cs">
+      <DependentUpon>201712171715440_Subcategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712180744050_dbchageTable.cs" />
+    <Compile Include="Migrations\201712180744050_dbchageTable.Designer.cs">
+      <DependentUpon>201712180744050_dbchageTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712180745258_dbchageTableSpellings.cs" />
+    <Compile Include="Migrations\201712180745258_dbchageTableSpellings.Designer.cs">
+      <DependentUpon>201712180745258_dbchageTableSpellings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712180749091_dbchageTableCatagories.cs" />
+    <Compile Include="Migrations\201712180749091_dbchageTableCatagories.Designer.cs">
+      <DependentUpon>201712180749091_dbchageTableCatagories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712180751469_dbchageTableCatAndCou.cs" />
+    <Compile Include="Migrations\201712180751469_dbchageTableCatAndCou.Designer.cs">
+      <DependentUpon>201712180751469_dbchageTableCatAndCou.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Videos.cs" />
     <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,6 +289,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CustomCss\Custom.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -348,6 +377,17 @@
     <Content Include="Views\Videos\Edit.cshtml" />
     <Content Include="Views\Videos\Index.cshtml" />
     <Content Include="Views\Shared\NotAuthorized.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\SubCategories\Create.cshtml" />
+    <Content Include="Views\SubCategories\Delete.cshtml" />
+    <Content Include="Views\SubCategories\Details.cshtml" />
+    <Content Include="Views\SubCategories\Edit.cshtml" />
+    <Content Include="Views\SubCategories\Index.cshtml" />
+    <Content Include="Views\Shared\_Categories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -385,6 +425,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712130247207_video_Files.resx">
       <DependentUpon>201712130247207_video_Files.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171635116_categoryAdd.resx">
+      <DependentUpon>201712171635116_categoryAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712171715440_Subcategory.resx">
+      <DependentUpon>201712171715440_Subcategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712180744050_dbchageTable.resx">
+      <DependentUpon>201712180744050_dbchageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712180745258_dbchageTableSpellings.resx">
+      <DependentUpon>201712180745258_dbchageTableSpellings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712180749091_dbchageTableCatagories.resx">
+      <DependentUpon>201712180749091_dbchageTableCatagories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712180751469_dbchageTableCatAndCou.resx">
+      <DependentUpon>201712180751469_dbchageTableCatAndCou.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
