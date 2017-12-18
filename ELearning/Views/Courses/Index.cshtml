@@ -81,12 +81,40 @@
         @foreach(var item in ViewBag.OnePageOfProducts)
         {
             <div class="col-md-4">
-                <div class="jumbotron"  style="height:50ch">
-                    <h3 >
-                        
-                        @Html.ActionLink((string)item.Name, "Details", new { id = item.ID })
-                        
-                    </h3>
+                
+
+                @*<div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            @Html.ActionLink((string)item.Name, "Details", new { id = item.ID })
+                            <img src="~/Content/Images/@item.Image" class="img-responsive img-thumbnail" style="max-height:150px;" />
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                    <div class="panel-footer">Panel footer</div>
+                </div>*@
+
+
+                <div class="jumbotron"  style="height:60ch;">
+                    <div>
+                        <img src="~/Content/Images/@item.Image" class="img-responsive img-thumbnail" style="max-height:150px;" />
+                        <h3>
+
+                            @Html.ActionLink((string)item.Name, "Details", new { id = item.ID })
+
+                        </h3>
+                        @if (item.Price <= 0)
+                        {
+                            <span class="label label-primary " style="float:right">Free</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default " style="float:right">$@item.Price</span>
+                        }
+                    </div>
+                   
                     <p style="text-align:left ; font-size:smaller; color:gray">
                         <b>By : </b>
                         @item.ApplicationUser.FullName

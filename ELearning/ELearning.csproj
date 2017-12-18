@@ -271,6 +271,14 @@
     <Compile Include="Migrations\201712180751469_dbchageTableCatAndCou.Designer.cs">
       <DependentUpon>201712180751469_dbchageTableCatAndCou.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712181644363_courseTablePrice.cs" />
+    <Compile Include="Migrations\201712181644363_courseTablePrice.Designer.cs">
+      <DependentUpon>201712181644363_courseTablePrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712181645322_courseTableImage.cs" />
+    <Compile Include="Migrations\201712181645322_courseTableImage.Designer.cs">
+      <DependentUpon>201712181645322_courseTableImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -391,6 +399,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
     <Folder Include="Content\Videos\" />
   </ItemGroup>
   <ItemGroup>
@@ -443,6 +452,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712180751469_dbchageTableCatAndCou.resx">
       <DependentUpon>201712180751469_dbchageTableCatAndCou.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712181644363_courseTablePrice.resx">
+      <DependentUpon>201712181644363_courseTablePrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712181645322_courseTableImage.resx">
+      <DependentUpon>201712181645322_courseTableImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

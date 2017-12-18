@@ -102,11 +102,31 @@
     }
 </style>
 
-
-<h2>@Html.DisplayFor(model => model.Name)</h2>
-<p>@Html.DisplayFor(model => model.Discription)</p>
-<br />
-<p><b>BY : </b>@Html.DisplayFor(model => model.ApplicationUser.FullName) </p>
+<div class="container" style="padding-top:2em">
+    <div class="row">
+        <div class="col-lg-2">
+            <img src="~/Content/Images/@Model.Image" class="img-responsive img-thumbnail" style="max-height:150px;" />
+        </div>
+        <div class="col-md-8">
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
+            <p>@Html.DisplayFor(model => model.Discription)</p>
+            <br />
+            <p><b>BY : </b>@Html.DisplayFor(model => model.ApplicationUser.FullName) </p>
+            <h3>
+                @if (Model.Price <= 0)
+            {
+                    <span class="label label-primary " style="float:right"> Free </span>
+                }
+                else
+                {
+                   
+                    <span class="label label-default"  style="float:right" >$@Model.Price</span>
+                }
+            </h3>
+        </div>
+    </div>
+</div>
+<hr />
 
 @*<div>
     <h4>Course</h4>
@@ -179,7 +199,7 @@
 
         }
     </ul>*@
-<div >
+<div>
     <center>
 
         <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->

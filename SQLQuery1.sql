@@ -91,3 +91,35 @@ create proc UpdateSubCategories
  begin
  Update [dbo].[SubCategories] set[Name]= @Name,[Discription]=@Discription,[Category_ID]=@CategoriID where[ID]=@id
  end
+
+
+ create proc GetSubCategoriesForListItem 1
+ (
+ @id int
+ )
+ as
+ begin
+  select * from [dbo].[SubCategories] where [Category_ID]=@id
+  end
+
+
+
+  USE [aspnet-ELearningDB]
+GO
+/****** Object:  StoredProcedure [dbo].[AddCourse]    Script Date: 12/18/2017 11:19:14 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ ALTER proc [dbo].[AddCourse]
+ (
+ @name nvarchar(max),
+ @discription nvarchar(max),
+ @uID nvarchar(max),
+ @price decimal(18,2),
+ @image nvarchar(max)
+ )
+ as
+ begin
+ insert into [dbo].[Courses]([Name],[Discription],[ApplicationUser_Id],[Price],[Image]) values (@name,@discription,@uID,@price,@image)
+ end

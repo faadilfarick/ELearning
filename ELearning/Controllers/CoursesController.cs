@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 using ELearning.DAL;
 using System.Data.SqlClient;
 using PagedList;
-
+using System.IO;
 
 namespace ELearning.Controllers
 {
@@ -36,6 +36,7 @@ namespace ELearning.Controllers
             var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
             string role = getRoleForUserID(userID);
             ViewBag.role = role;
+
             //diplaying cources according to the users 
             if (role == "STUDENT" || role == "")//if role=student or not logged in all cources are visible
             {
@@ -62,6 +63,21 @@ namespace ELearning.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult SubCatByCat(int categoryId)
+        {
+            // Filter the states by country. For example:
+            var subs = (from s in db.SubCategories
+                        where s.ID == s.Category.ID
+                        select new
+                        {
+                            id = s.ID,
+                            state = s.Name
+                        }).ToArray();
+
+            return Json(subs);
+        }
+
         // GET: Courses/Details/5
         public ActionResult Details(int? id, int? page)
         {
@@ -74,7 +90,7 @@ namespace ELearning.Controllers
             string query = "select * from Videos where [Course_ID]='" + id + "'";
             SqlDataReader reader = new SystemDAL().executeQuerys(query);
             List<Videos> videoListForCourse = new List<Videos>();
-            
+
             Videos vid = null;
             while (reader.Read())
             {
@@ -85,7 +101,7 @@ namespace ELearning.Controllers
                 //    vid.Course.ID = Convert.ToInt32(reader[3]);
                 vid.FilePath = reader[4].ToString();
                 videoListForCourse.Add(vid);
-                
+
             }
             ViewBag.videosList = videoListForCourse;
             var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -98,7 +114,7 @@ namespace ELearning.Controllers
             }
 
 
-            var products = videoListForCourse.OrderBy(v=>v.Name); //returns IQueryable<Product> representing an unknown number of products. a thousand maybe?
+            var products = videoListForCourse.OrderBy(v => v.Name); //returns IQueryable<Product> representing an unknown number of products. a thousand maybe?
 
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
             var onePageOfProducts = products.ToPagedList(pageNumber, 8); // will only contain 25 products max because of the pageSize
@@ -112,6 +128,7 @@ namespace ELearning.Controllers
         [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Create()
         {
+            ViewBag.categories = new SelectList(db.Categories.ToList(), "ID", "Name");
             return View();
 
         }
@@ -122,12 +139,27 @@ namespace ELearning.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN,INSTRUCTOR")]
-        public ActionResult Create(Course course)
+        public ActionResult Create(Course course, HttpPostedFileBase upload)
         {
+            var fileName = "";
+            var path = "";
+            if (upload == null)
+            {
+
+                ViewBag.vidError = "Image Requrired...";
+                return View(course);
+            }
+            else if (upload.ContentLength > 0)
+            {
+                string extension = Path.GetExtension(upload.FileName);
+                fileName = course.ID + course.Name + extension;
+                path = Path.Combine(Server.MapPath("~/Content/Images"));
+                upload.SaveAs(path + "\\" + fileName);
+            }
             if (ModelState.IsValid)
             {
                 var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                string query = "AddCourse '" + course.Name + "','" + course.Discription + "','" + userID + "'";
+                string query = "AddCourse '" + course.Name + "','" + course.Discription + "','" + userID + "','" + course.Price + "','" + fileName + "'";
                 bool res = new SystemDAL().executeNonQuerys(query);
                 return RedirectToAction("Index");
             }
@@ -158,23 +190,37 @@ namespace ELearning.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN,INSTRUCTOR")]
-        public ActionResult Edit([Bind(Include = "ID,Name,Discription")] Course course)
+        public ActionResult Edit([Bind(Include = "ID,Name,Discription,Price")] Course course, HttpPostedFileBase upload)
         {
 
             var CurrentLoggedUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
             Course c = db.Courses.Find(course.ID);
             var owner = c.ApplicationUser.Id;
+            var fileName = c.Image;
+            var path = "";
             if (ModelState.IsValid)
             {
                 if (CurrentLoggedUser == owner)
                 {
-                    //detach this entity from the DbSet
-                    db.Entry(c).State = EntityState.Detached;
+                    if (upload != null)
+                    {
+                        string extension = Path.GetExtension(upload.FileName);
+                        fileName = course.ID + course.Name + extension;
+                        path = Path.Combine(Server.MapPath("~/Content/Images"));
+                        upload.SaveAs(path + "\\" + fileName);
+                    }
+                    ////detach this entity from the DbSet
+                    //db.Entry(c).State = EntityState.Detached;
 
-                    //set the state from the entity that you just received to modified 
-                    db.Entry(course).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    ////set the state from the entity that you just received to modified 
+                    //db.Entry(course).State = EntityState.Modified;
+                    //db.SaveChanges();
+                    string query = "UpdateCourse '" + course.ID + "','" + course.Name + "','" + course.Discription + "','" + course.Price + "','" + fileName + "'";
+                    bool res = new SystemDAL().executeNonQuerys(query);
+                    if (res == true)
+                        return RedirectToAction("Index");
+                    else
+                        return View(course);
                 }
                 else
                 {

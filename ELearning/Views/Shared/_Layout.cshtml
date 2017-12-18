@@ -48,6 +48,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+   
     <script type="text/javascript">
         var $iframe = $('iframe'),
             $videoLink = $('.video-link'),
@@ -84,6 +85,10 @@
             $player.appendTo('body').addClass('js--show-video');
                         });
     </script>
+
+
+  
+   
 
     @*<script type="text/javascript">
         $(document).ready(function () {
