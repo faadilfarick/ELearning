@@ -11,6 +11,13 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -28,7 +35,72 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    @if (ViewBag.role == "ADMIN" || ViewBag.role == "INSTRUCTOR")
+    {
+        <p>@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+       @Html.ActionLink("Back to List", "Index")</p>
+    }
+    else
+    {
+       <p>@Html.ActionLink("Back to List", "Index")</p>
+    }
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in ViewBag.cou)
+        {
+            <div class="col-md-4">
+
+                <div class="jumbotron" style="height:60ch;">
+                    <div>
+                        <img src="~/Content/Images/@item.Image" class="img-responsive img-thumbnail" style="max-height:150px;" />
+                        <h3>
+
+                            @Html.ActionLink((string)item.Name, "Details","Courses", new { id = item.ID },null)
+
+                        </h3>
+                        @if (item.Price <= 0)
+                        {
+                            <span class="label label-primary " style="float:right">Free</span>
+                        }
+                        else
+                        {
+                            <span class="label label-default " style="float:right">$@item.Price</span>
+                        }
+                    </div>
+
+                    <p style="text-align:left ; font-size:smaller; color:gray">
+                        <b>By : </b>
+                        @item.ApplicationUser.FullName
+                    </p>
+                    <hr />
+                    <p style="overflow:hidden;height:5ch; max-height:5ch; font-size:18px;">
+                        @item.Discription
+                    </p>
+
+                    @{
+                        if (ViewBag.role == "ADMIN" || ViewBag.role == "INSTRUCTOR")
+                        {
+                            <p style="font-size:small;">
+                                @Html.ActionLink("Edit", "Edit", "Courses", new { id = item.ID }, null) |
+                                @Html.ActionLink("Details", "Details", "Courses", new { id = item.ID }, null) |
+                                @Html.ActionLink("Delete", "Delete","Courses", new { id = item.ID }, null)
+                            </p>
+                        }
+                        else
+                        {
+                            <p style="font-size:small">
+                                @Html.ActionLink("Details", "Details", "Courses", new { id = item.ID }, null)
+                            </p>
+
+                        }
+                    }
+                </div>
+
+            </div>
+                        }
+
+    </div>
+</div>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ELearning.Models;
 using System.Data.SqlClient;
+using Microsoft.AspNet.Identity;
 using ELearning.DAL;
 
 namespace ELearning.Controllers
@@ -16,6 +17,15 @@ namespace ELearning.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private string getRoleForUserID(string id)
+        {
+            string role = "";
+            string query = "getRoleForUserId '" + id + "'";
+            SqlDataReader reader = new SystemDAL().executeQuerys(query);
+            if (reader.Read())
+                role = reader[0].ToString();
+            return role;
+        }
         // GET: Categories
         public ActionResult Index()
         {
@@ -25,6 +35,9 @@ namespace ELearning.Controllers
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {
+            var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            string role = getRoleForUserID(userID);
+            ViewBag.role = role;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,6 +60,8 @@ namespace ELearning.Controllers
                 subs.Add(subcat);
             }
             ViewBag.sub = subs;
+            List<Course> cou = db.Courses.Where(c=>c.MainCategory.ID==id).ToList();//getting courses for the category
+            ViewBag.cou = cou;
             return View(category);
         }
 

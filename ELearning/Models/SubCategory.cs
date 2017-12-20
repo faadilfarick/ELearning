@@ -9,7 +9,7 @@ namespace ELearning.Models
     public class SubCategory
     {
         public int ID { get; set; }
-        [Required,Display(Name ="Sub-Category Name")]
+        [Required,Display(Name ="Sub-Category")]
         public string Name { get; set; }
         public string Discription { get; set; }
 
