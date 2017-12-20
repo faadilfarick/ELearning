@@ -286,6 +286,14 @@
     <Compile Include="Migrations\201712181645322_courseTableImage.Designer.cs">
       <DependentUpon>201712181645322_courseTableImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712200415481_priceNotNull.cs" />
+    <Compile Include="Migrations\201712200415481_priceNotNull.Designer.cs">
+      <DependentUpon>201712200415481_priceNotNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712200436113_CatAndSubeNotNull.cs" />
+    <Compile Include="Migrations\201712200436113_CatAndSubeNotNull.Designer.cs">
+      <DependentUpon>201712200436113_CatAndSubeNotNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -410,6 +418,7 @@
     <Content Include="Views\PayWithCard\Failure.cshtml" />
     <Content Include="Views\PayWithCard\Success.cshtml" />
     <Content Include="Views\PayWithCard\PaymentWithCreditCard.cshtml" />
+    <Content Include="Views\Courses\subComboPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -472,6 +481,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712181645322_courseTableImage.resx">
       <DependentUpon>201712181645322_courseTableImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712200415481_priceNotNull.resx">
+      <DependentUpon>201712200415481_priceNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712200436113_CatAndSubeNotNull.resx">
+      <DependentUpon>201712200436113_CatAndSubeNotNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

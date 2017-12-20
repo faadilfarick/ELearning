@@ -12,6 +12,8 @@ using ELearning.DAL;
 using System.Data.SqlClient;
 using PagedList;
 using System.IO;
+using System.Configuration;
+using System.Web.Script.Serialization;
 
 namespace ELearning.Controllers
 {
@@ -124,14 +126,30 @@ namespace ELearning.Controllers
             return View(course);
         }
 
+
+        public ActionResult GetSubCat(int id /* drop down value */)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<SubCategory> model = db.SubCategories.Where(c => c.Category.ID == id).ToList(); // This is for example put your code to fetch record.   
+            ViewBag.Subcategories = model;
+           
+            JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();
+            string result = javaScriptSerializer.Serialize(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Courses/Create
         [Authorize(Roles = "ADMIN,INSTRUCTOR")]
         public ActionResult Create()
         {
+           
+            ViewBag.categoriess = db.Categories.ToList();
             ViewBag.categories = new SelectList(db.Categories.ToList(), "ID", "Name");
             return View();
 
         }
+
+        //ViewBag.CourseInfo = new SelectList(db.Courses.Where(c => c.ApplicationUser.Id == userID).ToList(), "ID", "Name");
 
         // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -156,15 +174,16 @@ namespace ELearning.Controllers
                 path = Path.Combine(Server.MapPath("~/Content/Images"));
                 upload.SaveAs(path + "\\" + fileName);
             }
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
+                
                 var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                string query = "AddCourse '" + course.Name + "','" + course.Discription + "','" + userID + "','" + course.Price + "','" + fileName + "'";
+                string query = "AddCourse '" + course.Name + "','" + course.Discription + "','" + userID + "','" + course.Price + "','" + fileName + "','" + course.MainCategory.ID + "','" + course.SubCategory.ID + "'";
                 bool res = new SystemDAL().executeNonQuerys(query);
                 return RedirectToAction("Index");
-            }
+            //}
 
-            return View(course);
+            //return View(course);
         }
 
         // GET: Courses/Edit/5  
@@ -181,6 +200,10 @@ namespace ELearning.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.categoriess = db.Categories.ToList();
+            ViewBag.categories = new SelectList(db.Categories.ToList(), "ID", "Name");
+            var couese=db.Courses.Find(id);
+            ViewBag.subcategories = new SelectList(db.SubCategories.Where(c => c.Category.ID == couese.MainCategory.ID).ToList(), "ID", "Name");
             return View(course);
         }
 
@@ -190,7 +213,7 @@ namespace ELearning.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN,INSTRUCTOR")]
-        public ActionResult Edit([Bind(Include = "ID,Name,Discription,Price")] Course course, HttpPostedFileBase upload)
+        public ActionResult Edit( Course course, HttpPostedFileBase upload)
         {
 
             var CurrentLoggedUser = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -198,8 +221,8 @@ namespace ELearning.Controllers
             var owner = c.ApplicationUser.Id;
             var fileName = c.Image;
             var path = "";
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 if (CurrentLoggedUser == owner)
                 {
                     if (upload != null)
@@ -215,12 +238,17 @@ namespace ELearning.Controllers
                     ////set the state from the entity that you just received to modified 
                     //db.Entry(course).State = EntityState.Modified;
                     //db.SaveChanges();
-                    string query = "UpdateCourse '" + course.ID + "','" + course.Name + "','" + course.Discription + "','" + course.Price + "','" + fileName + "'";
+                    string query = "UpdateCourse '" + course.ID + "','" + course.Name + "','" + course.Discription + "','" + course.Price + "','" + fileName + "','" + course.MainCategory.ID + "','" + course.SubCategory.ID + "'"; 
                     bool res = new SystemDAL().executeNonQuerys(query);
                     if (res == true)
                         return RedirectToAction("Index");
                     else
+                    {
+                        ViewBag.categoriess = db.Categories.ToList();
+                        ViewBag.categories = new SelectList(db.Categories.ToList(), "ID", "Name");
+                        ViewBag.subcategories = new SelectList(db.SubCategories.ToList(), "ID", "Name");
                         return View(course);
+                    }
                 }
                 else
                 {
@@ -228,8 +256,8 @@ namespace ELearning.Controllers
                     return View("~/Views/Shared/NotAuthorized.cshtml");
                 }
 
-            }
-            return View(course);
+            //}
+            //return View(course);
         }
 
         // GET: Courses/Delete/5

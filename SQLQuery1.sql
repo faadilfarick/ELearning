@@ -117,9 +117,53 @@ GO
  @discription nvarchar(max),
  @uID nvarchar(max),
  @price decimal(18,2),
+ @image nvarchar(max),
+ @MainCat int,
+ @subCat int
+ )
+ as
+ begin
+ insert into [dbo].[Courses]([Name],[Discription],[ApplicationUser_Id],[Price],[Image],[MainCategory_ID],[SubCategory_ID]) 
+ values (@name,@discription,@uID,@price,@image,@MainCat,@subCat)
+ end
+
+
+
+ create proc UpdateCourse
+ (
+ @id int,
+  @name nvarchar(max),
+ @discription nvarchar(max),
+ @price decimal(18,2),
  @image nvarchar(max)
  )
  as
  begin
- insert into [dbo].[Courses]([Name],[Discription],[ApplicationUser_Id],[Price],[Image]) values (@name,@discription,@uID,@price,@image)
+ update [dbo].[Courses]  set [Name]=@name,[Discription]=@discription,[Price]=@price,[Image]=@image where[ID]=@id
  end
+
+
+
+ USE [aspnet-ELearningDB]
+GO
+/****** Object:  StoredProcedure [dbo].[UpdateCourse]    Script Date: 12/19/2017 11:46:36 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ ALTER proc [dbo].[UpdateCourse]
+ (
+ @id int,
+  @name nvarchar(max),
+ @discription nvarchar(max),
+ @price decimal(18,2),
+ @image nvarchar(max),
+ @MainCat int,
+ @subCat int
+ )
+ as
+ begin
+ update [dbo].[Courses]  set [Name]=@name,[Discription]=@discription,[Price]=@price,[Image]=@image ,[MainCategory_ID]=@MainCat,[SubCategory_ID]=@subCat where[ID]=@id
+ end
+
+

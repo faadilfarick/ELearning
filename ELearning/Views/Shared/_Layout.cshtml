@@ -10,7 +10,7 @@
 
 
 </head>
-<body >
+<body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -48,27 +48,26 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-   
+
     <script type="text/javascript">
         var $iframe = $('iframe'),
             $videoLink = $('.video-link'),
             playerTemplate = '<div class="player"><div class="player__video"><div class="video-filler"></div><button class="video-close">&times;</button><iframe class="video-iframe" src="{{iframevideo}}" frameborder="0" allowfullscreen></iframe></div><div/>';
 
-
         $videoLink.on('click', function (e) {
-                            var localTemplate = '',
-                                videoWidth = parseInt($(this).data('width')),
-                                videoHeight = parseInt($(this).data('height')),
-                                videoAspect = (videoHeight / videoWidth) * 100,
-                                // elements
+            var localTemplate = '',
+                videoWidth = parseInt($(this).data('width')),
+                videoHeight = parseInt($(this).data('height')),
+                videoAspect = (videoHeight / videoWidth) * 100,
+                // elements
                 $player = null,
                 $video = null,
                 $close = null,
                 $iframe = null;
 
-                            e.preventDefault();
+            e.preventDefault();
 
-                            localTemplate = playerTemplate.replace('{{iframevideo}}', $(this).prop('href'));
+            localTemplate = playerTemplate.replace('{{iframevideo}}', $(this).prop('href'));
 
             $player = $(localTemplate);
 
@@ -80,34 +79,73 @@
                 .find('.video-close')
                 .on('click', function () {
                     $(this).off().closest('.player').hide().remove();
-                            });
+                });
 
             $player.appendTo('body').addClass('js--show-video');
-                        });
-    </script>
-
-
-  
-   
-
-    @*<script type="text/javascript">
-        $(document).ready(function () {
-            $('.navbar a.dropdown-toggle').on('click', function (e) {
-                var $el = $(this);
-                var $parent = $(this).offsetParent(".dropdown-menu");
-                $(this).parent("li").toggleClass('open');
-
-                if (!$parent.parent().hasClass('nav')) {
-                    $el.next().css({ "top": $el[0].offsetTop, "left": $parent.outerWidth() - 4 });
-                }
-
-                $('.nav li.open').not($(this).parents("li")).removeClass("open");
-
-                return false;
-            });
         });
 
-    </script>*@
+
+    </script>
+
+    @* Getting subcatagories Based on selection *@
+    <script type="text/javascript">
+        
+            function GetSubCat() {
+
+                debugger;
+                var catId = $("#CategoryDropDown").val();
+                // alert('first ' + catId);
+                $.ajax
+                    ({
+                        url: '/Courses/GetSubCat/' + catId,
+                        type: 'POST',
+                        datatype: 'application/json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            catId: +catId
+                        }),
+
+                        success: function (result) {
+                            // alert(result);
+                            $("#subCategoryDropDown").prop("disabled", false); 
+                            $("#subCategoryDropDown").html("");
+                            $.each($.parseJSON(result), function (i, city) {
+                                $("#subCategoryDropDown").append
+                                    ($('<option></option>').val(city.ID).html(city.Name))
+                               
+                            })
+
+                        },
+                        error: function () {
+                            $("#subCategoryDropDown").html("");
+                            $("#subCategoryDropDown").append
+                                ($('<option></option>').val(-1).html("--Select sub-Category--"))
+                            //alert("Whooaaa! Something went wrong..")
+                        },
+                    });
+            }
+      
+    </script>  
+
+
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+                $('.navbar a.dropdown-toggle').on('click', function (e) {
+                    var $el = $(this);
+                    var $parent = $(this).offsetParent(".dropdown-menu");
+                    $(this).parent("li").toggleClass('open');
+
+                    if (!$parent.parent().hasClass('nav')) {
+                        $el.next().css({ "top": $el[0].offsetTop, "left": $parent.outerWidth() - 4 });
+                    }
+
+                    $('.nav li.open').not($(this).parents("li")).removeClass("open");
+
+                    return false;
+                });
+            });
+
+        </script>*@
 </body>
 </html>
 

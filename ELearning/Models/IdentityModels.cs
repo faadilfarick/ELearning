@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 
 namespace ELearning.Models
 {
@@ -42,13 +43,14 @@ namespace ELearning.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+          //  this.Configuration.ProxyCreationEnabled = false;
         }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-
+      
         public System.Data.Entity.DbSet<ELearning.Models.Course> Courses { get; set; }
 
         public System.Data.Entity.DbSet<ELearning.Models.Videos> Videos { get; set; }

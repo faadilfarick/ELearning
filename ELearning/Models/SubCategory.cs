@@ -13,6 +13,7 @@ namespace ELearning.Models
         public string Name { get; set; }
         public string Discription { get; set; }
 
+
         public virtual Category Category { get; set; }
     }
 }

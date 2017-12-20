@@ -16,12 +16,15 @@ namespace ELearning.Models
         [Required]
         public string Discription { get; set; }
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Please Enter Numbers Only")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [Required]
         public decimal Price { get; set; }
         public string Image { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
+        [Required]
         public virtual Category MainCategory { get; set; }
+        [Required]
         public virtual SubCategory SubCategory { get; set; }
 
         public virtual ICollection<Videos> Videos { get; set; }
