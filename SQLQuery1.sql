@@ -2,7 +2,7 @@ create proc AddVideos
 (
 @name nvarchar(max),
 @dis nvarchar(max),
-@cID int
+@cID int,
 @path nvarchar(max)
 )
 as
@@ -10,6 +10,7 @@ begin
 insert into [dbo].[Videos]([Name],[Discription],[Course_ID],[FilePath]) values(@name,@dis,@cID,@path)
 end
 
+go
 
 create proc UpdateVideos
 (
@@ -22,7 +23,7 @@ as
 begin
 update [dbo].[Videos] set [Name]=@name,[Discription]=@dis,[Course_ID]=@cID where [ID]=@id
 end
-
+go
 
 create proc UpdateVideosWithFile
 (
@@ -40,7 +41,7 @@ end
 --SELECT * FROM [dbo].[Videos] 
 -- SELECT * FROM [dbo].[Courses] where Courses.ID=1
 -- select* from [dbo].[AspNetUsers]
-
+go
 
  create proc AddCourse
  (
@@ -52,7 +53,7 @@ end
  begin
  insert into [dbo].[Courses]([Name],[Discription],[ApplicationUser_Id]) values (@name,@discription,@uID)
  end
-
+ go
 
 create proc getRoleForUserId(
 @UID nvarchar(max)
@@ -68,6 +69,7 @@ FROM            AspNetRoles INNER JOIN
  
  end
 
+ go
  create proc addSubCategories
  (
  @Name nvarchar(max),
@@ -78,7 +80,7 @@ FROM            AspNetRoles INNER JOIN
  begin
  insert into [dbo].[SubCategories]([Name],[Discription],[Category_ID]) values(@Name,@Discription,@CategoriID)
  end
-
+ go
 
 create proc UpdateSubCategories
  (
@@ -92,8 +94,8 @@ create proc UpdateSubCategories
  Update [dbo].[SubCategories] set[Name]= @Name,[Discription]=@Discription,[Category_ID]=@CategoriID where[ID]=@id
  end
 
-
- create proc GetSubCategoriesForListItem 1
+ go
+ create proc GetSubCategoriesForListItem 
  (
  @id int
  )
@@ -104,7 +106,6 @@ create proc UpdateSubCategories
 
 
 
-  USE [aspnet-ELearningDB]
 GO
 /****** Object:  StoredProcedure [dbo].[AddCourse]    Script Date: 12/18/2017 11:19:14 PM ******/
 SET ANSI_NULLS ON
@@ -126,7 +127,8 @@ GO
  insert into [dbo].[Courses]([Name],[Discription],[ApplicationUser_Id],[Price],[Image],[MainCategory_ID],[SubCategory_ID]) 
  values (@name,@discription,@uID,@price,@image,@MainCat,@subCat)
  end
-
+ 
+Go
 
 
  create proc UpdateCourse
@@ -142,9 +144,8 @@ GO
  update [dbo].[Courses]  set [Name]=@name,[Discription]=@discription,[Price]=@price,[Image]=@image where[ID]=@id
  end
 
+ 
 
-
- USE [aspnet-ELearningDB]
 GO
 /****** Object:  StoredProcedure [dbo].[UpdateCourse]    Script Date: 12/19/2017 11:46:36 AM ******/
 SET ANSI_NULLS ON

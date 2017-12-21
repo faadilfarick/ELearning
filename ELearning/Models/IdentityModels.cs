@@ -59,6 +59,8 @@ namespace ELearning.Models
 
         public System.Data.Entity.DbSet<ELearning.Models.SubCategory> SubCategories { get; set; }
 
+        
+
         // public System.Data.Entity.DbSet<ELearning.Models.RoleViewModel> RoleViewModels { get; set; }
     }
 }
