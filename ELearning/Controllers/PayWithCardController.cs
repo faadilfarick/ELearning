@@ -21,7 +21,14 @@ namespace ELearning.Controllers
             TempData["Name"] = course.Name;
             TempData["City"] = course.Name;
 
-            return View();
+            if(course != null)
+            {                
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult PaymentWithCreditCard([Bind(Include = "ID,ItemName,ItemPrice,ItemQuantity,cvv,month,year,fname,lname,cardnumber,cardtype,fee,Subtotal,Total,Shipping,Tax")]
