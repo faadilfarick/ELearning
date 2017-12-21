@@ -21,7 +21,7 @@ namespace ELearning.Controllers
         }
 
         // GET: Forum/Details/5
-        public ActionResult Questions(int? id)
+        public ActionResult Posts(int? id)
         {
             if (id == null)
             {
