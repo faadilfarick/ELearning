@@ -167,4 +167,55 @@ GO
  update [dbo].[Courses]  set [Name]=@name,[Discription]=@discription,[Price]=@price,[Image]=@image ,[MainCategory_ID]=@MainCat,[SubCategory_ID]=@subCat where[ID]=@id
  end
 
+ GO
+/****** Object:  StoredProcedure [dbo].[AddCourse]    Script Date: 12/21/2017 3:32:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ ALTER proc [dbo].[AddCourse]
+ (
+ @name nvarchar(max),
+ @discription nvarchar(max),
+ @uID nvarchar(max),
+ @price decimal(18,2),
+ @image nvarchar(max),
+ @MainCat int,
+ @subCat int
+ )
+ as
+ begin
+ insert into [dbo].[Courses]([Name],[Discription],[ApplicationUser_Id],[Price],[Image],[MainCategory_ID],[SubCategory_ID]) 
+ values (@name,@discription,@uID,@price,@image,@MainCat,@subCat)
+
+ declare @Cid int
+
+ select @Cid= [ID] from [dbo].[Courses] where [Name]=@name
+ insert into [dbo].[Fora]([CourseTitle],[Description],[Course_ID])values(@name,@discription,@Cid)
+ end
+
+ GO
+/****** Object:  StoredProcedure [dbo].[UpdateCourse]    Script Date: 12/21/2017 3:40:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ ALTER proc [dbo].[UpdateCourse]
+ (
+ @id int,
+  @name nvarchar(max),
+ @discription nvarchar(max),
+ @price decimal(18,2),
+ @image nvarchar(max),
+ @MainCat int,
+ @subCat int
+ )
+ as
+ begin
+ update [dbo].[Courses]  set [Name]=@name,[Discription]=@discription,[Price]=@price,[Image]=@image ,[MainCategory_ID]=@MainCat,[SubCategory_ID]=@subCat where[ID]=@id
+
+ update [dbo].[Fora] set [CourseTitle]=@name,[Description]=@discription where [Course_ID]=@id
+ end
+
+
 

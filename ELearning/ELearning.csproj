@@ -303,6 +303,10 @@
     <Compile Include="Migrations\201712210858577_forums.Designer.cs">
       <DependentUpon>201712210858577_forums.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712211013097_formAndCourseLink.cs" />
+    <Compile Include="Migrations\201712211013097_formAndCourseLink.Designer.cs">
+      <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -508,6 +512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712210858577_forums.resx">
       <DependentUpon>201712210858577_forums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211013097_formAndCourseLink.resx">
+      <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
