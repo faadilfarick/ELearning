@@ -66,6 +66,7 @@ namespace ELearning.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             return View();
@@ -76,6 +77,7 @@ namespace ELearning.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create([Bind(Include = "ID,Name,Discription")] Category category)
         {
             if (ModelState.IsValid)
@@ -89,6 +91,7 @@ namespace ELearning.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -108,6 +111,7 @@ namespace ELearning.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit([Bind(Include = "ID,Name,Discription")] Category category)
         {
             if (ModelState.IsValid)
@@ -120,6 +124,7 @@ namespace ELearning.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -137,6 +142,7 @@ namespace ELearning.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Categories.Find(id);
