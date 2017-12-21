@@ -212,8 +212,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayWithCardController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\RepliesController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="DAL\DBEstablish.cs" />
     <Compile Include="DAL\SystemDAL.cs" />
     <Compile Include="Global.asax.cs">
@@ -307,6 +310,14 @@
     <Compile Include="Migrations\201712211013097_formAndCourseLink.Designer.cs">
       <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712211123140_onoonlm.cs" />
+    <Compile Include="Migrations\201712211123140_onoonlm.Designer.cs">
+      <DependentUpon>201712211123140_onoonlm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712211152012_onoonlmkjbkj.cs" />
+    <Compile Include="Migrations\201712211152012_onoonlmkjbkj.Designer.cs">
+      <DependentUpon>201712211152012_onoonlmkjbkj.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -317,10 +328,11 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Paymentinfo.cs" />
     <Compile Include="Models\PaypalConfiguration.cs" />
+    <Compile Include="Models\Posts.cs" />
+    <Compile Include="Models\Replies.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Videos.cs" />
-    <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -435,9 +447,19 @@
     <Content Include="Views\Courses\subComboPartial.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
     <Content Include="Views\Forum\Delete.cshtml" />
-    <Content Include="Views\Forum\Questions.cshtml" />
     <Content Include="Views\Forum\Edit.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
+    <Content Include="Views\Forum\Posts.cshtml" />
+    <Content Include="Views\Replies\Create.cshtml" />
+    <Content Include="Views\Replies\Delete.cshtml" />
+    <Content Include="Views\Replies\Details.cshtml" />
+    <Content Include="Views\Replies\Edit.cshtml" />
+    <Content Include="Views\Replies\Index.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -515,6 +537,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712211013097_formAndCourseLink.resx">
       <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211123140_onoonlm.resx">
+      <DependentUpon>201712211123140_onoonlm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211152012_onoonlmkjbkj.resx">
+      <DependentUpon>201712211152012_onoonlmkjbkj.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
