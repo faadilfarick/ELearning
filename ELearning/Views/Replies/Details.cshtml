@@ -1,22 +1,27 @@
-﻿@model ELearning.Models.Forum
+﻿@model ELearning.Models.Replies
 
 @{
-    ViewBag.Title = "Questions";
+    Layout = null;
 }
 
+<!DOCTYPE html>
 
-    <h2>Questions</h2>
-
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
     <div>
-        <h4>Forum</h4>
+        <h4>Replies</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.CourseTitle)
+                @Html.DisplayNameFor(model => model.PostID)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.CourseTitle)
+                @Html.DisplayFor(model => model.PostID)
             </dd>
     
             <dt>
@@ -33,6 +38,5 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+</body>
+</html>

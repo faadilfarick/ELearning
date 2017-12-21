@@ -10,107 +10,107 @@ using ELearning.Models;
 
 namespace ELearning.Controllers
 {
-    public class ForumController : Controller
+    public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Forum
+        // GET: Posts
         public ActionResult Index()
         {
-            return View(db.Forum.ToList());
+            return View(db.Posts.ToList());
         }
 
-        // GET: Forum/Details/5
-        public ActionResult Posts(int? id)
+        // GET: Posts/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum forum = db.Forum.Find(id);
-            if (forum == null)
+            Posts posts = db.Posts.Find(id);
+            if (posts == null)
             {
                 return HttpNotFound();
             }
-            return View(forum);
+            return View(posts);
         }
 
-        // GET: Forum/Create
+        // GET: Posts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Forum/Create
+        // POST: Posts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CourseTitle,Description")] Forum forum)
+        public ActionResult Create([Bind(Include = "ID,CourseID,Title,Description")] Posts posts)
         {
             if (ModelState.IsValid)
             {
-                db.Forum.Add(forum);
+                db.Posts.Add(posts);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(forum);
+            return View(posts);
         }
 
-        // GET: Forum/Edit/5
+        // GET: Posts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum forum = db.Forum.Find(id);
-            if (forum == null)
+            Posts posts = db.Posts.Find(id);
+            if (posts == null)
             {
                 return HttpNotFound();
             }
-            return View(forum);
+            return View(posts);
         }
 
-        // POST: Forum/Edit/5
+        // POST: Posts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CourseTitle,Description")] Forum forum)
+        public ActionResult Edit([Bind(Include = "ID,CourseID,Title,Description")] Posts posts)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(forum).State = EntityState.Modified;
+                db.Entry(posts).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(forum);
+            return View(posts);
         }
 
-        // GET: Forum/Delete/5
+        // GET: Posts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum forum = db.Forum.Find(id);
-            if (forum == null)
+            Posts posts = db.Posts.Find(id);
+            if (posts == null)
             {
                 return HttpNotFound();
             }
-            return View(forum);
+            return View(posts);
         }
 
-        // POST: Forum/Delete/5
+        // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Forum forum = db.Forum.Find(id);
-            db.Forum.Remove(forum);
+            Posts posts = db.Posts.Find(id);
+            db.Posts.Remove(posts);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

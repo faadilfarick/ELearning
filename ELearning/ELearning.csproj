@@ -212,6 +212,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayWithCardController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\RepliesController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="DAL\DBEstablish.cs" />
@@ -303,6 +305,10 @@
     <Compile Include="Migrations\201712210858577_forums.Designer.cs">
       <DependentUpon>201712210858577_forums.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712211013328_forumstuff.cs" />
+    <Compile Include="Migrations\201712211013328_forumstuff.Designer.cs">
+      <DependentUpon>201712211013328_forumstuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -313,6 +319,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Paymentinfo.cs" />
     <Compile Include="Models\PaypalConfiguration.cs" />
+    <Compile Include="Models\Posts.cs" />
+    <Compile Include="Models\Replies.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Videos.cs" />
@@ -431,9 +439,19 @@
     <Content Include="Views\Courses\subComboPartial.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
     <Content Include="Views\Forum\Delete.cshtml" />
-    <Content Include="Views\Forum\Questions.cshtml" />
+    <Content Include="Views\Forum\Posts.cshtml" />
     <Content Include="Views\Forum\Edit.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Replies\Create.cshtml" />
+    <Content Include="Views\Replies\Delete.cshtml" />
+    <Content Include="Views\Replies\Details.cshtml" />
+    <Content Include="Views\Replies\Edit.cshtml" />
+    <Content Include="Views\Replies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -508,6 +526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712210858577_forums.resx">
       <DependentUpon>201712210858577_forums.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211013328_forumstuff.resx">
+      <DependentUpon>201712211013328_forumstuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
