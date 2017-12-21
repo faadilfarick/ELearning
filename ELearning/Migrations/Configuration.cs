@@ -9,8 +9,7 @@ namespace ELearning.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "ELearning.Models.ApplicationDbContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ELearning.Models.ApplicationDbContext context)

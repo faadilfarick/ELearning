@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayWithCardController.cs" />
@@ -294,10 +295,19 @@
     <Compile Include="Migrations\201712200436113_CatAndSubeNotNull.Designer.cs">
       <DependentUpon>201712200436113_CatAndSubeNotNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712210857285_forum.cs" />
+    <Compile Include="Migrations\201712210857285_forum.Designer.cs">
+      <DependentUpon>201712210857285_forum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712210858577_forums.cs" />
+    <Compile Include="Migrations\201712210858577_forums.Designer.cs">
+      <DependentUpon>201712210858577_forums.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Logger.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -419,6 +429,11 @@
     <Content Include="Views\PayWithCard\Success.cshtml" />
     <Content Include="Views\PayWithCard\PaymentWithCreditCard.cshtml" />
     <Content Include="Views\Courses\subComboPartial.cshtml" />
+    <Content Include="Views\Forum\Create.cshtml" />
+    <Content Include="Views\Forum\Delete.cshtml" />
+    <Content Include="Views\Forum\Questions.cshtml" />
+    <Content Include="Views\Forum\Edit.cshtml" />
+    <Content Include="Views\Forum\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -487,6 +502,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712200436113_CatAndSubeNotNull.resx">
       <DependentUpon>201712200436113_CatAndSubeNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712210857285_forum.resx">
+      <DependentUpon>201712210857285_forum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712210858577_forums.resx">
+      <DependentUpon>201712210858577_forums.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
