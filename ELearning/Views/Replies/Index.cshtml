@@ -1,17 +1,12 @@
 ﻿@model IEnumerable<ELearning.Models.Replies>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
 }
 
-<!DOCTYPE html>
+    <h3>Index</h3>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
+
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -43,5 +38,7 @@
     }
     
     </table>
-</body>
-</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+}

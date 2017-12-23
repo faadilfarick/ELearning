@@ -1,17 +1,13 @@
 ﻿@model ELearning.Models.Posts
 
 @{
-    Layout = null;
+    ViewBag.Title = "Edit";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
+    <h3>Edit</h3>
+
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -23,9 +19,9 @@
             @Html.HiddenFor(model => model.ID)
     
             <div class="form-group">
-                @Html.LabelFor(model => model.CourseID, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CourseID, "CourseID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CourseID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("CourseID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CourseID, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -57,5 +53,7 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+}

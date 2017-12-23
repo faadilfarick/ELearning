@@ -17,7 +17,8 @@ namespace ELearning.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            var posts = db.Posts.Include(p => p.Course);
+            return View(posts.ToList());
         }
 
         // GET: Posts/Details/5
@@ -38,6 +39,7 @@ namespace ELearning.Controllers
         // GET: Posts/Create
         public ActionResult Create()
         {
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name");
             return View();
         }
 
@@ -55,6 +57,7 @@ namespace ELearning.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", posts.CourseID);
             return View(posts);
         }
 
@@ -70,6 +73,7 @@ namespace ELearning.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", posts.CourseID);
             return View(posts);
         }
 
@@ -86,6 +90,7 @@ namespace ELearning.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CourseID = new SelectList(db.Courses, "ID", "Name", posts.CourseID);
             return View(posts);
         }
 
