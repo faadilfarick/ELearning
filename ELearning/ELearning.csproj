@@ -313,6 +313,30 @@
     <Compile Include="Migrations\201712211013097_formAndCourseLink.Designer.cs">
       <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712211123140_onoonlm.cs" />
+    <Compile Include="Migrations\201712211123140_onoonlm.Designer.cs">
+      <DependentUpon>201712211123140_onoonlm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712211152012_onoonlmkjbkj.cs" />
+    <Compile Include="Migrations\201712211152012_onoonlmkjbkj.Designer.cs">
+      <DependentUpon>201712211152012_onoonlmkjbkj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712230543346_deleteposts.cs" />
+    <Compile Include="Migrations\201712230543346_deleteposts.Designer.cs">
+      <DependentUpon>201712230543346_deleteposts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712230624190_fewchangesk.cs" />
+    <Compile Include="Migrations\201712230624190_fewchangesk.Designer.cs">
+      <DependentUpon>201712230624190_fewchangesk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712230633577_repliesadded.cs" />
+    <Compile Include="Migrations\201712230633577_repliesadded.Designer.cs">
+      <DependentUpon>201712230633577_repliesadded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712231848167_iniio.cs" />
+    <Compile Include="Migrations\201712231848167_iniio.Designer.cs">
+      <DependentUpon>201712231848167_iniio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -442,9 +466,19 @@
     <Content Include="Views\Courses\subComboPartial.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
     <Content Include="Views\Forum\Delete.cshtml" />
-    <Content Include="Views\Forum\Questions.cshtml" />
     <Content Include="Views\Forum\Edit.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
+    <Content Include="Views\Forum\Posts.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Replies\Create.cshtml" />
+    <Content Include="Views\Replies\Delete.cshtml" />
+    <Content Include="Views\Replies\Details.cshtml" />
+    <Content Include="Views\Replies\Edit.cshtml" />
+    <Content Include="Views\Replies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -523,6 +557,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712211013097_formAndCourseLink.resx">
       <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211123140_onoonlm.resx">
+      <DependentUpon>201712211123140_onoonlm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211152012_onoonlmkjbkj.resx">
+      <DependentUpon>201712211152012_onoonlmkjbkj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712230543346_deleteposts.resx">
+      <DependentUpon>201712230543346_deleteposts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712230624190_fewchangesk.resx">
+      <DependentUpon>201712230624190_fewchangesk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712230633577_repliesadded.resx">
+      <DependentUpon>201712230633577_repliesadded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712231848167_iniio.resx">
+      <DependentUpon>201712231848167_iniio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
