@@ -10,5 +10,6 @@ namespace ELearning.Models
         public int ID { get; set; }
         public int PostID { get; set; }
         public string Description { get; set; }
+        public virtual Posts Posts { get; set; }
     }
 }
