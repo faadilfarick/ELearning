@@ -337,6 +337,10 @@
     <Compile Include="Migrations\201712231848167_iniio.Designer.cs">
       <DependentUpon>201712231848167_iniio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712241046126_jnijniniewonfewon.cs" />
+    <Compile Include="Migrations\201712241046126_jnijniniewonfewon.Designer.cs">
+      <DependentUpon>201712241046126_jnijniniewonfewon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -575,6 +579,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712231848167_iniio.resx">
       <DependentUpon>201712231848167_iniio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712241046126_jnijniniewonfewon.resx">
+      <DependentUpon>201712241046126_jnijniniewonfewon.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
