@@ -13,7 +13,8 @@ namespace ELearning
             // Any connection or hub wire up and configuration should go here
             app.MapSignalR();
 
-            //ConfigureAuth(app); 
+            //ConfigureAuth(app);
+            
             //Commenting this will take of user authentication..This is the major problem here if this part is uncommented
             //signalR will not get the name
             //nor display chat messages
