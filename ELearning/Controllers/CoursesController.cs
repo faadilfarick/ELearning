@@ -288,6 +288,12 @@ namespace ELearning.Controllers
             return RedirectToAction("Index");
         }
 
+        // SignalIR Chat
+        public ActionResult Chat()
+        {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
