@@ -8,8 +8,9 @@ namespace ELearning.Models
     public class Paymentinfo
     {
         public int ID { get; set; }
+        public int CourseID { get; set; }
         public string ItemName { get; set; }
-        public int ItemPrice { get; set; }
+        public decimal ItemPrice { get; set; }
         public int ItemQuantity { get; set; }
 
 

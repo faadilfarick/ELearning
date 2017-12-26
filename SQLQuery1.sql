@@ -218,4 +218,15 @@ GO
  end
 
 
+ create proc addToPurchasedCourse
+ (
+ @UserId nvarchar(max),
+ @CID int
+ )
+ as
+ begin
+ insert into [dbo].[PurchasedCourses] ([ApplicationUser_Id],[Course_ID])values(@UserId,@CID)
+ end
+
+
 

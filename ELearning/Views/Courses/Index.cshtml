@@ -17,86 +17,12 @@
     }
 }
 
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discription)
-        </th>
-        <th>
-            Owner
-        </th>
-        <th></th>
-    </tr>*@
-
-    @*@foreach (var item in Model)
-    {*@
-        @*<tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
-            </td>
-            <td>*@
-                @*<p>@ViewBag.role </p>*@
-
-                @{
-                    @*if (ViewBag.role == "ADMIN" || ViewBag.role == "INSTRUCTOR")
-                    {
-                        <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                        </p>
-                    }
-                    else
-                    {
-                        <p>
-                            @Html.ActionLink("Details", "Details", new { id = item.ID })
-                        </p>
-
-                    }*@
-                }
-
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
-            @*</td>
-        </tr>
-                    }
-    
-    
-</table>*@
-
 <div class="container">
     <div class="row">
         @foreach(var item in ViewBag.OnePageOfProducts)
         {
             <div class="col-md-4">
                 
-
-                @*<div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            @Html.ActionLink((string)item.Name, "Details", new { id = item.ID })
-                            <img src="~/Content/Images/@item.Image" class="img-responsive img-thumbnail" style="max-height:150px;" />
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        Panel content
-                    </div>
-                    <div class="panel-footer">Panel footer</div>
-                </div>*@
-
-
                 <div class="jumbotron"  style="height:60ch;">
                     <div>
                         <img src="~/Content/Images/@item.Image" class="img-responsive img-thumbnail" style="max-height:150px;" />
@@ -112,6 +38,54 @@
                         else
                         {
                             <span class="label label-default " style="float:right">$@item.Price</span>
+                            <input class="btn btn-default" type="button" value="Pay" onclick="location.href='@Url.Action("Index", "PayWithCard",new { Cid=item.ID})'" />
+
+
+                            //new { id = Model.ID }
+                            if (ViewBag.role == "STUDENT" || ViewBag.role == "")
+                            {
+                                foreach (var c in ViewBag.purchased)
+                                {
+                                    if (ViewBag.userID == c.ApplicationUser.Id && c.Course.ID == item.ID)
+                                    {
+                                        <span class="label label-success " style="float:right">Purchased</span>
+                                    }
+                                    @*else if(c.Course.ID != item.ID)
+                                    {
+                                        <span class="label label-default " style="float:right">$@item.Price</span>
+                                        <input class="btn btn-default" type="button" value="Pay" onclick="location.href='@Url.Action("Index", "PayWithCard",new { Cid=item.ID})'" />
+                                       
+                                    }*@
+                                }
+                                //if (c.Course.ID != item.ID)
+                                //       {
+                                @*foreach (var p in ViewBag.purchased)
+                                {
+
+                                    if (ViewBag.userID != p.ApplicationUser.Id)
+                                    {
+                                        <p>@p.ApplicationUser.Id</p><br />
+                                        <p>@ViewBag.userID</p><br />
+
+                                        <span class="label label-default " style="float:right">$@item.Price</span>
+                                        <input class="btn btn-default" type="button" value="Pay" onclick="location.href='@Url.Action("Index", "PayWithCard",new { Cid=item.ID})'" />
+                                    }
+                                }*@
+
+
+                                //}
+                                @*if (ViewBag.pur == "true")
+                                {
+                                    <span class="label label-success " style="float:right">Purchased</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-default " style="float:right">$@item.Price</span>
+                                    <input class="btn btn-default" type="button" value="Pay" onclick="location.href='@Url.Action("Index", "PayWithCard",new { Cid=item.ID})'" />
+                                }*@
+
+
+    }
                         }
                     </div>
                    
@@ -148,6 +122,16 @@
 
             </div>
         }
+
+       @*@foreach (var p in ViewBag.purchased)
+        {
+
+       // <p>@p.ID</p><br />
+        <p>@p.ApplicationUser.Id</p><br />
+        
+        <p>@p.Course.ID</p><br />
+       }*@
+
         
     </div>
 </div>

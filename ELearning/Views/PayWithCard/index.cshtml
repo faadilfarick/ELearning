@@ -7,12 +7,25 @@
 <h2>Pay Direct With Card</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("PaymentWithCreditCard", "PayWithCard", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2">Course</label>            
+            <div class="col-md-10">
+                <label class="control-label ">@ViewBag.courseInfo.Name</label>                
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Total Price</label>
+            <div class="col-md-10">
+                <label class="control-label ">$@ViewBag.courseInfo.Price</label>
+            </div>
+        </div>
+        <hr/>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.fname, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,9 +47,9 @@
             @Html.LabelFor(model => model.cardtype, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" style="min-height:10px">
                 @Html.DropDownListFor(model => model.cardtype, new List<SelectListItem>
-                { new SelectListItem{Text="visa", Value="visa",Selected=true},
-                new SelectListItem{Text="mastercard", Value="mastercard" },
-                new SelectListItem{Text="amex", Value="amex" }})
+                { new SelectListItem{Text="VISA", Value="visa",Selected=true},
+                new SelectListItem{Text="MASTER", Value="mastercard" },
+                new SelectListItem{Text="AMEX", Value="amex" }})
             </div>
         </div>
 
@@ -83,20 +96,19 @@
                 @Html.ValidationMessageFor(model => model.cvv, "", new { @class = "text-danger" })
             </div>
         </div>
-
+       
+        @Html.HiddenFor(model => model.CourseID);
+        @Html.HiddenFor(model => model.ItemPrice);
+        @Html.HiddenFor(model => model.ItemName);
         <div class="form-group">
-            @Html.LabelFor(model => model.fee, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-
-                @Html.EditorFor(model => model.fee, new { htmlAttributes = new { @Value = "10", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fee, "", new { @class = "text-danger" })
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Pay with Credit Card" class="btn btn-default" />
             </div>
         </div>
-
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Pay with Credit Card" formaction="@Url.Action("PaymentWithCreditCard","PayWithCard")" class="btn btn-default" />
             </div>
-        </div>
+        </div>*@
     </div>
 }

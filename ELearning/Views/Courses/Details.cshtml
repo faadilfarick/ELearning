@@ -114,14 +114,30 @@
             <p><b>BY : </b>@Html.DisplayFor(model => model.ApplicationUser.FullName) </p>
             <h3>
                 @if (Model.Price <= 0)
-            {
-                    <span class="label label-primary " style="float:right"> Free </span>
+                {
+                    <span class="label label-primary " style="float:right">Free</span>
                 }
                 else
                 {
-                   
-                    <span class="label label-default"  style="float:right" >$@Model.Price</span>
+                    <span class="label label-default " style="float:right">$@Model.Price</span>
+                    <input class="btn btn-default" type="button" value="Pay" onclick="location.href='@Url.Action("Index", "PayWithCard",new { Cid=Model.ID})'" />
+
+                    //new { id = Model.ID }
+                    if (ViewBag.role == "STUDENT" || ViewBag.role == "")
+                    {
+                        if (ViewBag.pur == "true")
+                        {
+                            <span class="label label-success " style="float:right">Purchased</span>
+                        }
+                        else if (ViewBag.pur == "false" & Model.Price >= 0)
+                        {
+                           
+                        }
+
+
+                    }
                 }
+
             </h3>
         </div>
     </div>
@@ -157,22 +173,30 @@
 
         </dl>
     </div>*@
-<div class="container">
-    <div class="row  ">
-        @foreach (var videos in ViewBag.OnePageOfProducts)
-        {
+@if (ViewBag.pur == "true"|| ViewBag.role == "ADMIN" || ViewBag.role == "INSTRUCTOR" || Model.Price <= 0)
+{
+    <div class="container">
+        <div class="row  ">
+            @foreach (var videos in ViewBag.OnePageOfProducts)
+            {
 
-            <div class="col-md-3 voffset2">
+                <div class="col-md-3 voffset2">
 
-                @*<img src="~/Content/Videos/@videos.FilePath" />*@
-                @*<p>  Click the button and then resize the window.</p>*@
-                <a class="video-link" href="~/Content/Videos/@videos.FilePath" data-width="1920" data-height="1080">Open video</a>
-                <h4>@videos.Name</h4>
-                <p>@videos.Discription</p>
-            </div>
-        }
+                    @*<img src="~/Content/Videos/@videos.FilePath" />*@
+                    @*<p>  Click the button and then resize the window.</p>*@
+                    <a class="video-link" href="~/Content/Videos/@videos.FilePath" data-width="1920" data-height="1080">Open video</a>
+                    <h4>@videos.Name</h4>
+                    <p>@videos.Discription</p>
+                </div>
+            }
+        </div>
     </div>
-</div>
+}
+else
+{
+    <h3>Paid Content <a href="@Url.Action("Index", "PayWithCard",new { Cid=Model.ID})">Click here to purchase</a> </h3>
+}
+
 @{
     if (ViewBag.role == "ADMIN" || ViewBag.role == "INSTRUCTOR")
     {

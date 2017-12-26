@@ -212,6 +212,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayWithCardController.cs" />
+    <Compile Include="Controllers\PurchasedCoursesController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="DAL\DBEstablish.cs" />
@@ -307,6 +308,10 @@
     <Compile Include="Migrations\201712211013097_formAndCourseLink.Designer.cs">
       <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712211326312_purchasedCourses.cs" />
+    <Compile Include="Migrations\201712211326312_purchasedCourses.Designer.cs">
+      <DependentUpon>201712211326312_purchasedCourses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -317,6 +322,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Paymentinfo.cs" />
     <Compile Include="Models\PaypalConfiguration.cs" />
+    <Compile Include="Models\PurchasedCourse.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\Videos.cs" />
@@ -443,6 +449,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\Videos\" />
+    <Folder Include="Views\PurchasedCourses\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -515,6 +522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712211013097_formAndCourseLink.resx">
       <DependentUpon>201712211013097_formAndCourseLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211326312_purchasedCourses.resx">
+      <DependentUpon>201712211326312_purchasedCourses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

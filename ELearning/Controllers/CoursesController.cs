@@ -38,13 +38,30 @@ namespace ELearning.Controllers
             var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
             string role = getRoleForUserID(userID);
             ViewBag.role = role;
-
+            ViewBag.userID = userID;
+            
             //diplaying cources according to the users 
             if (role == "STUDENT" || role == "")//if role=student or not logged in all cources are visible
             {
                 List<Course> cou = db.Courses.ToList();
                 var products = cou.OrderBy(v => v.ID); //returns IQueryable<Product> representing an unknown number of products. a thousand maybe?
-
+                var purchase = db.PurchasedCourses.Where(c => c.ApplicationUser.Id == userID);
+                ViewBag.purchased = purchase;
+                foreach(var c in purchase)
+                {
+                    if (c.ApplicationUser.Id.Equals(userID) )
+                    {
+                        ViewBag.pur = "true";
+                    }
+                    else
+                    {
+                        ViewBag.pur = "false";
+                    }
+                }
+                //if (purchase != null)
+                //    ViewBag.pur = "true";
+                //else
+                //    ViewBag.pur = "false";
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
                 var onePageOfProducts = products.ToPagedList(pageNumber, 6); // will only contain 25 products max because of the pageSize
 
@@ -88,6 +105,19 @@ namespace ELearning.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var purchase = db.PurchasedCourses.ToList();//getting purchased Course List
+            foreach (var c in purchase)//checking current logged user has purchased or not
+            {
+                if (c.ApplicationUser.Id.Equals(userID) && c.Course.ID.Equals(id))
+                {
+                    ViewBag.pur = "true";
+                }
+                else
+                {
+                    ViewBag.pur = "false";
+                }
+            }
             Course course = db.Courses.Find(id);
             string query = "select * from Videos where [Course_ID]='" + id + "'";
             SqlDataReader reader = new SystemDAL().executeQuerys(query);
@@ -106,7 +136,7 @@ namespace ELearning.Controllers
 
             }
             ViewBag.videosList = videoListForCourse;
-            var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+          //  var userID = System.Web.HttpContext.Current.User.Identity.GetUserId();
             string role = getRoleForUserID(userID);
             ViewBag.role = role;
             //  var videoListForCourse=
