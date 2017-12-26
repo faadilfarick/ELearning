@@ -501,7 +501,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\Videos\" />
-    <Folder Include="Views\PurchasedCourses\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
