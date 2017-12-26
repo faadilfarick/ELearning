@@ -1,0 +1,51 @@
+﻿@model ELearning.Models.ForumPost
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ForumPost</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<hr />
+@{
+    foreach (var r in ViewBag.rep)
+    {
+        <div class="jumbotron">
+            @*<h3>@Model.Question</h3>*@
+            <p>@r.Answer</p>
+            <p>By : @r.ApplicationUser.FullName</p>
+            @*@Html.ActionLink("Answer", "Create", "ForumPostReplies", new { id = q.ID }, null)
+            @Html.ActionLink("View", "Details", "ForumPosts", new { id = q.ID }, null)*@
+
+        </div>
+
+
+        }
+    }

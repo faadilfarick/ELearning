@@ -217,6 +217,7 @@ GO
  update [dbo].[Fora] set [CourseTitle]=@name,[Description]=@discription where [Course_ID]=@id
  end
 
+ go
 
  create proc addToPurchasedCourse
  (
@@ -229,4 +230,18 @@ GO
  end
 
 
+ go
+
+
+ create proc addNewForumPost
+ (
+ @question nvarchar(max),
+ @discription nvarchar(max),
+ @appUser nvarchar(max),
+ @forumId int
+ )
+ as
+ begin
+ insert into [dbo].[ForumPosts]([Question],[Discription],[ApplicationUser_Id],[Forum_ID]) values(@question,@discription,@appUser,@forumId)
+ end
 

@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.DynamicData;
 
 namespace ELearning.Models
 {
-   
-    public class Forum
+    public class ForumPostReply
     {
         public int ID { get; set; }
-        public string CourseTitle { get; set; }
-        public string Description { get; set; }
+        public string Answer { get; set; }
 
-         public virtual Course Course { get; set; }
+        public virtual ForumPost ForumPost { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 
     }

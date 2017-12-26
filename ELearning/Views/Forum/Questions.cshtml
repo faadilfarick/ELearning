@@ -12,7 +12,7 @@
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.CourseTitle)
+                <p>Post</p>
             </dt>
     
             <dd>
@@ -33,6 +33,26 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
+<hr />
+@Html.ActionLink("Post", "Create", "Forumposts", new { id = Model.ID },null)
+<hr />
+@{
+    foreach (var q in ViewBag.ques)
+    {
+        <div class="jumbotron">
+            <h3>@q.Question</h3>
+            <p>@q.Discription</p>
+            <p>By : @q.ApplicationUser.FullName</p>
+@Html.ActionLink("Answer", "Create", "ForumPostReplies", new { id =q.ID }, null)
+            @Html.ActionLink("View", "Details", "ForumPosts", new { id = q.ID }, null)
+
+
+
+
+        </div>
+    }
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

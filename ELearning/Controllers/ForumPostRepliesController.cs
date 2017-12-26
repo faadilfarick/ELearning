@@ -7,113 +7,117 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ELearning.Models;
+using Microsoft.AspNet.Identity;
+using ELearning.DAL;
 
 namespace ELearning.Controllers
 {
-    public class ForumController : Controller
+    public class ForumPostRepliesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Forum
+        // GET: ForumPostReplies
         public ActionResult Index()
         {
-            return View(db.Forum.ToList());
+            return View(db.ForumPostReplies.ToList());
         }
 
-        // GET: Forum/Details/5
-        public ActionResult Questions(int? id)
+        // GET: ForumPostReplies/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum forum = db.Forum.Find(id);
-            if (forum == null)
+            ForumPostReply forumPostReply = db.ForumPostReplies.Find(id);
+            if (forumPostReply == null)
             {
                 return HttpNotFound();
             }
-            var questions = db.ForumPosts.Where(f => f.Forum.ID == id);
-            
-            ViewBag.ques = questions;
-            return View(forum);
+            return View(forumPostReply);
         }
 
-        // GET: Forum/Create
-        public ActionResult Create()
+        // GET: ForumPostReplies/Create
+        public ActionResult Create(int? id)
         {
+            var Ques = new SelectList(db.ForumPosts.Where(p=>p.ID==id), "ID", "Question");
+            ViewBag.que = Ques;
             return View();
         }
 
-        // POST: Forum/Create
+        // POST: ForumPostReplies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CourseTitle,Description")] Forum forum)
+        public ActionResult Create(ForumPostReply forumPostReply)
         {
-            if (ModelState.IsValid)
+            var user = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            string query = "addAnswers '" + forumPostReply.Answer + "','" + user + "','" + forumPostReply.ForumPost.ID + "'";
+            bool res = new SystemDAL().executeNonQuerys(query);
+            if (res == true)
             {
-                db.Forum.Add(forum);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            //db.ForumPostReplies.Add(forumPostReply);
+            //db.SaveChanges();
 
-            return View(forum);
+            return View(forumPostReply);
         }
 
-        // GET: Forum/Edit/5
+        // GET: ForumPostReplies/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum forum = db.Forum.Find(id);
-            if (forum == null)
+            ForumPostReply forumPostReply = db.ForumPostReplies.Find(id);
+            if (forumPostReply == null)
             {
                 return HttpNotFound();
             }
-            return View(forum);
+            return View(forumPostReply);
         }
 
-        // POST: Forum/Edit/5
+        // POST: ForumPostReplies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CourseTitle,Description")] Forum forum)
+        public ActionResult Edit([Bind(Include = "ID,Answer")] ForumPostReply forumPostReply)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(forum).State = EntityState.Modified;
+                db.Entry(forumPostReply).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(forum);
+            return View(forumPostReply);
         }
 
-        // GET: Forum/Delete/5
+        // GET: ForumPostReplies/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Forum forum = db.Forum.Find(id);
-            if (forum == null)
+            ForumPostReply forumPostReply = db.ForumPostReplies.Find(id);
+            if (forumPostReply == null)
             {
                 return HttpNotFound();
             }
-            return View(forum);
+            return View(forumPostReply);
         }
 
-        // POST: Forum/Delete/5
+        // POST: ForumPostReplies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Forum forum = db.Forum.Find(id);
-            db.Forum.Remove(forum);
+            ForumPostReply forumPostReply = db.ForumPostReplies.Find(id);
+            db.ForumPostReplies.Remove(forumPostReply);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

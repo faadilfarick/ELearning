@@ -209,6 +209,8 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
+    <Compile Include="Controllers\ForumPostRepliesController.cs" />
+    <Compile Include="Controllers\ForumPostsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PayWithCardController.cs" />
@@ -312,11 +314,17 @@
     <Compile Include="Migrations\201712211326312_purchasedCourses.Designer.cs">
       <DependentUpon>201712211326312_purchasedCourses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712260652526_forumContent.cs" />
+    <Compile Include="Migrations\201712260652526_forumContent.Designer.cs">
+      <DependentUpon>201712260652526_forumContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Forum.cs" />
+    <Compile Include="Models\ForumPost.cs" />
+    <Compile Include="Models\ForumReply.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Logger.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -444,6 +452,16 @@
     <Content Include="Views\Forum\Questions.cshtml" />
     <Content Include="Views\Forum\Edit.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
+    <Content Include="Views\ForumPosts\Create.cshtml" />
+    <Content Include="Views\ForumPosts\Delete.cshtml" />
+    <Content Include="Views\ForumPosts\Details.cshtml" />
+    <Content Include="Views\ForumPosts\Edit.cshtml" />
+    <Content Include="Views\ForumPosts\Index.cshtml" />
+    <Content Include="Views\ForumPostReplies\Create.cshtml" />
+    <Content Include="Views\ForumPostReplies\Delete.cshtml" />
+    <Content Include="Views\ForumPostReplies\Details.cshtml" />
+    <Content Include="Views\ForumPostReplies\Edit.cshtml" />
+    <Content Include="Views\ForumPostReplies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -525,6 +543,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712211326312_purchasedCourses.resx">
       <DependentUpon>201712211326312_purchasedCourses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712260652526_forumContent.resx">
+      <DependentUpon>201712260652526_forumContent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

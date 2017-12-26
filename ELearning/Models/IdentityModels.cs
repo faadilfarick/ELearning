@@ -63,6 +63,10 @@ namespace ELearning.Models
 
         public System.Data.Entity.DbSet<ELearning.Models.PurchasedCourse> PurchasedCourses { get; set; }
 
+        public System.Data.Entity.DbSet<ELearning.Models.ForumPost> ForumPosts { get; set; }
+
+        public System.Data.Entity.DbSet<ELearning.Models.ForumPostReply> ForumPostReplies { get; set; }
+
         // public System.Data.Entity.DbSet<ELearning.Models.RoleViewModel> RoleViewModels { get; set; }
     }
 }
