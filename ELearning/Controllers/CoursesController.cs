@@ -318,6 +318,21 @@ namespace ELearning.Controllers
             return RedirectToAction("Index");
         }
 
+        public List<Course> Passcourse()
+        {
+            var courseCatList = db.Courses.ToList();
+            return courseCatList;
+        }
+
+        //To get latest courses added to home page
+        public List<Course> PasscoursetoHome()
+        {
+            var course = from s in db.Courses
+                         select s;
+            course = course.OrderByDescending(s => s.ID);
+            return course.ToList();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

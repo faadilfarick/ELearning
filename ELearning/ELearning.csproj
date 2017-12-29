@@ -318,6 +318,14 @@
     <Compile Include="Migrations\201712260652526_forumContent.Designer.cs">
       <DependentUpon>201712260652526_forumContent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712261208364_gcjgcjyc.cs" />
+    <Compile Include="Migrations\201712261208364_gcjgcjyc.Designer.cs">
+      <DependentUpon>201712261208364_gcjgcjyc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270613327_test.cs" />
+    <Compile Include="Migrations\201712270613327_test.Designer.cs">
+      <DependentUpon>201712270613327_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -462,6 +470,7 @@
     <Content Include="Views\ForumPostReplies\Details.cshtml" />
     <Content Include="Views\ForumPostReplies\Edit.cshtml" />
     <Content Include="Views\ForumPostReplies\Index.cshtml" />
+    <Content Include="Views\Home\_CoursePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -546,6 +555,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712260652526_forumContent.resx">
       <DependentUpon>201712260652526_forumContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712261208364_gcjgcjyc.resx">
+      <DependentUpon>201712261208364_gcjgcjyc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270613327_test.resx">
+      <DependentUpon>201712270613327_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

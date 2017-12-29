@@ -22,9 +22,9 @@
             </div>
         </div>*@
         <div class="form-group">
-            @Html.LabelFor(m => m.Forum, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Forum.CourseTitle, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Forum.ID, new SelectList(ViewBag.forum, "Value", "Text"), new { @class = "form-control" })
+               @Html.DropDownListFor(m => m.Forum.ID, new SelectList(ViewBag.forum, "Value", "Text"), new { @class = "form-control" })
             </div>
         </div>
       

@@ -1,0 +1,24 @@
+﻿@using ELearning.Controllers;
+
+
+    @foreach (var course in new CoursesController().PasscoursetoHome().Take(20))
+    {
+        <div style="float:left; padding:6px;">
+
+            <a href=@Url.Action("Details", "Courses", new { id = course.ID })>
+                <img src="~/Content/Images/@course.Image" class="img-responsive img-thumbnail"
+                     style="max-width:215px; max-height:180px; min-width:210px; min-height:180px; display:inline" />
+                <center>@Html.DisplayFor(modelItem => course.Name)</center>
+            </a>
+            @if (Convert.ToDouble(course.Price) == 0.00)
+            {
+                <center><h5>Free</h5></center>
+            }
+            else
+            { 
+                <center><h5>$ @Html.DisplayFor(modelItem => course.Price)</h5></center>
+            }
+             
+            
+        </div>
+    }

@@ -10,7 +10,7 @@
 
 
 </head>
-<body>
+<body style="background-color:lightgrey;">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -42,7 +42,38 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - E-LEARNING</p>
+            <div class="container  ">
+                <div class="col-md-3 col-lg-3 ">
+                    <h3>Telephone</h3>
+                    <p><span class="glyphicon glyphicon-phone"></span> +94 777 66 56 89</p>
+                </div>
+
+                <div class="col-md-3 col-lg-3 ">
+                    <h3>E-Mail Us</h3>
+                    <p><span class="glyphicon glyphicon-envelope"></span> Email : <a href="mailto:admin@gmail.com">admin@gmail.com</a></p>
+                </div>
+
+                <div class="col-md-3 col-lg-3 ">
+                    <h3>Follow Us</h3>
+                    <a href="http://www.facebook.com/ELearning">f<i class="fa fa-facebook" aria-hidden="true"></i> </i></a><br />
+                    <a href="http://www.twitter.com/ELearning">t<i class="fa fa-twitter-square"> </i></a><br />
+                    <a href="http://www.instagram.com/ELearning">i<i class="fa fa-instagram"> </i></a><br />
+                    <a href="http://www.linkedin.com/in/ELearning">l<i class="fa fa-linkedin-square"> </i></a>
+                    
+                </div>
+
+                <div class="col-md-3  col-lg-3 footer-left">
+                    <h3>Address</h3>
+                    <p><span class="glyphicon glyphicon-map-marker"> </span> The Web Portal</p>
+                    <p> Colombo </p>
+                    <p> Sri Lanka. </p>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="foot-bottom" style="text-align:center;margin-top:0;padding-top:0">
+                    <p>&copy; @DateTime.Now.Year - ELearning</p>
+                </div>
+            </div>
         </footer>
     </div>
 
